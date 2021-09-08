@@ -1,0 +1,66 @@
+.product-page
+    margin-left: 80px
+    margin-right: 80px
+    margin-top:40px
+
+    @media only screen and (max-width: 768px)
+        margin-left: 5px
+        margin-right: 5px
+        margin-top:5px
+    .product-page__main-container
+        display: grid
+        //grid-template-areas: 'productName'
+        @media only screen and (max-width: 768px)
+        .product-page__mobile-name
+            display: none
+            @media only screen and (max-width: 768px)
+                display: block
+                margin: 5px
+                margin-left: 9px
+        .product-page__carousel
+            width: 96vw
+            @media only screen and (max-width: 768px)
+                margin: auto
+            img
+                border-radius: 10px
+                width: 75%
+                //margin: auto
+                @media only screen and (max-width: 768px)
+                    width: 100%
+
+        .product-page__title-container
+            //margin-left: 50px
+            margin-top: 0px
+            height: 400px
+            position: relative
+
+            .product-page__name
+                //grid-area: productName
+                margin: 0px
+                //width: 100%
+                @media only screen and (max-width: 768px)
+                    display: none
+            .product-page__price-container
+                display: flex
+                position: absolute
+                bottom: 70px
+                font-size: 22px
+            .product-page__price
+                font-weight: 700
+                //width: 30%
+                width: 100%
+                margin-right: 70px
+            .product-page__cost-of-delivery
+                z-index: 100
+                //width: 300px
+            .product-page__buy-button
+                padding: 15px
+                background-color: #F3C10F
+                border-radius: 8px
+                border: none
+                font-size: 14px
+                font-weight: 600
+                position: absolute
+                bottom: 0px
+                text-align: center
+                //width: 150%

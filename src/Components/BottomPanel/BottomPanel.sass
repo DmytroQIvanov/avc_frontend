@@ -1,0 +1,42 @@
+.bottom-panel
+    width: 100%
+    height: 140px
+    background-color: #292929
+    margin-top: 40px
+    @media only screen and (max-width: 768px)
+        position: static
+        bottom:0px
+        height: 70px
+
+
+
+
+    .bottom-panel__container
+        height: 100%
+        display: grid
+        margin-left: 70px
+        margin-right: 70px
+        grid-template-columns: 1fr 3fr 3fr
+        @media only screen and (max-width: 768px)
+            margin-left: 0px
+            margin-right: 0px
+             
+        
+        .bottom-panel__logo
+            // width: 160px
+            margin: auto
+            @media only screen and (max-width: 768px)
+                width: 120px
+
+        .bottom-panel__copyrigth
+            margin: auto
+            @media only screen and (max-width: 768px)
+                font-size: 0.8em
+
+        .bottom-panel__social-networks
+            display: flex 
+            margin: auto
+            img 
+                margin: auto
+                margin-left: 10px
+                width: 60%

@@ -1,0 +1,34 @@
+{
+    "nav-bar.sportsnutrition": "Sports nutrition",
+    "nav-bar.equipment": "Equipment",
+    "nav-bar.clothing": "Clothing",
+    "nav-bar.vitamins": "Vitamins",
+
+    "main.title":"Online store from AVC",
+    "main.description":"An assistant in your sporting achievements. This is a great page of sports nutrition, AVC branded clothing and equipment \uD83D\uDD25",
+    "main.subtitle":"Your support in training",
+    "main.buy-button":"Buy",
+
+    "header.log-in": "Log in",
+    "header.search": "Search",
+
+    "login.number": "Number",
+    "login.password": "Password",
+    "login.log-in": "Login",
+    "login.account": "Don't have an account yet?",
+    "login.register": "Register",
+
+    "register.firstName": "First name",
+    "register.lastName": "Last name",
+    "register.number": "Number",
+    "register.password": "Password",
+    "register.confirmPassword": "Confirm password*",
+    "register.register": "Register",
+    "register.account": "Do you have an account?",
+    "register.log-in": "Login",
+
+    "products.nothingFound": "Nothing found",
+    "products.protein": "Protein",
+    "products.gainer": "Gainer",
+    "products.BCAA": "BCAA"
+}
