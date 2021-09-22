@@ -1,12 +1,7 @@
 import { IPost } from "./../../Interfaces/IPost";
 import { call, put } from "redux-saga/effects";
 import { request } from "../requests/adminLogin";
-import {
-  getPostError,
-  getPostsError,
-  getPostsSuccess,
-  getPostSuccess,
-} from "../Slices/postSlice";
+import { getPostError, getPostSuccess } from "../Slices/postSlice";
 
 export function* handlePost(data: any) {
   try {

@@ -4,6 +4,7 @@ import { adminLoginStart } from "../../store/Slices/adminSlice";
 import { RootState } from "../../store/store";
 
 import { Loader } from "../../Components/Loader/Loader";
+import "../../assets/design/inputs-buttons.sass";
 
 const AdminLoginPage = () => {
   const [login, setLogin] = useState("");
@@ -14,22 +15,6 @@ const AdminLoginPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(adminLoginStart({ url: "/admin/auth", method: "POST" }));
-    // fetch(`${hostAddress}/admin/auth`, {
-    //   method: "POST",
-    //   headers: {
-    //     // "Content-Type": "application/json",
-    //     // "Content-Type": "application/x-www-form-urlencoded",
-    //     // "Access-Control-Allow-Origin": "*",
-    //     // "Access-Control-Allow-Credentials": "true",
-    //   },
-    //   mode: "cors",
-    //   credentials: "include",
-    // })
-    //   .then((elem) => elem.json())
-    //   .then((elem) => {
-    //     console.log(elem);
-    //     dispatch(auth(elem));
-    //   });
   }, []);
   if (!firstFetch) return <Loader />;
   return (
@@ -43,6 +28,7 @@ const AdminLoginPage = () => {
             setLogin(elem.target.value);
           }}
           value={login}
+          className={"default-input"}
         />
       </div>
       <div>
@@ -54,6 +40,7 @@ const AdminLoginPage = () => {
           value={password}
           placeholder="********"
           type="password"
+          className={"default-input"}
         />
       </div>
       <button
@@ -66,6 +53,7 @@ const AdminLoginPage = () => {
             })
           );
         }}
+        className={"yellow-button"}
       >
         Увiйти
       </button>

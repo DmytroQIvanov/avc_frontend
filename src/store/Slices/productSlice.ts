@@ -3,6 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface ProductState {
   product: IProduct | null;
+  createData: {
+    arrayOfWeight: string[];
+    arrayOfTaste: string[];
+  };
   productType: string | null;
   loading: boolean;
 }
@@ -11,6 +15,11 @@ const initialState: ProductState = {
   product: null,
   loading: false,
   productType: null,
+
+  createData: {
+    arrayOfWeight: [],
+    arrayOfTaste: [],
+  },
 };
 
 export const productSlice = createSlice({
@@ -33,6 +42,18 @@ export const productSlice = createSlice({
     setProductType(state, action) {
       state.productType = action.payload;
     },
+
+    postComment(state, action) {
+      // state.productType = action.payload;
+    },
+
+    addArrayOfWeight(state, action) {
+      console.log(action.payload);
+      state.createData.arrayOfWeight[action.payload.i] = action.payload.data;
+    },
+    addArrayOfTaste(state, action) {
+      state.createData.arrayOfTaste[action.payload.i] = action.payload.data;
+    },
   },
 });
 
@@ -41,6 +62,9 @@ export const {
   getProductSuccess,
   getProductError,
   setProductType,
+  postComment,
+  addArrayOfWeight,
+  addArrayOfTaste,
 } = productSlice.actions;
 
 export default productSlice.reducer;

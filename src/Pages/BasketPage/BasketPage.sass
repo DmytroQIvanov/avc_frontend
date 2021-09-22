@@ -1,9 +1,36 @@
-.backet-page
+.basket-page
     .basket-page__order-container
         margin-left: 80px
         margin-right: 80px
+        @media only screen and (max-width: 768px)
+            margin: 0px
 
         .backet-page__order
+            position: relative
+            .basket-page__quantity-button
+                border: none
+                border-radius: 5px
+                background-color: #5e5e57
+                box-shadow: 3px 3px 3px 3px #1d1d1d
+                color: white
+                width: 40px
+                height: 25px
+                margin-right: 10px
+                margin-left: 10px
+                cursor: pointer
+            .basket-page__delete-button
+                position: absolute
+                top: 15px
+                right: 30px
+                width: 34px
+                height: 34px
+                border: 1px solid white
+                background-color: rgba(51, 51, 51, 0)
+                color: white
+                border-radius: 10px
+
+
+
             &::before
                 display: block
                 content: ""
@@ -22,3 +49,19 @@
                 margin-right: auto
             margin: 10px
             .order__name
+        .basket-page__to-order-button
+            text-decoration: none
+            color: #b9b9b9
+            border: none
+            border-radius: 5px
+            background-color: #5e5e57
+            box-shadow: 3px 3px 3px 3px #1d1d1d
+            padding: 10px
+            cursor: pointer
+            margin-top: 10px
+            display: block
+            width: 100px
+            text-align: center
+            height: 20px
+            line-height: 20px
+

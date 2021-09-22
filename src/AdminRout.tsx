@@ -4,11 +4,12 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import AdminProducts from "./Components/AdminProducts/AdminProducts";
+import AdminProducts from "./Pages/AdminProducts/AdminProducts";
 import AdminAddProductPage from "./Pages/AdminAddProductPage/AdminAddProductPage";
 import AdminPage from "./Pages/AdminPage/AdminPage";
 import AdminPosts from "./Pages/AdminPosts/AdminAddPosts";
 import AdminAddPosts from "./Pages/AdminPosts/AdminAddPosts";
+import AdminUsersPage from "./Pages/AdminUsersPage/AdminUsersPage";
 
 const AdminRout = () => {
   return (
@@ -22,6 +23,10 @@ const AdminRout = () => {
         </Route>
         <Route path="/admin/posts">
           <AdminAddProductPage />
+        </Route>
+
+        <Route path="/admin/users">
+          <AdminUsersPage />
         </Route>
         <Route path="/admin/products">
           <AdminProducts />

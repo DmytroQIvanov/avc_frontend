@@ -20,7 +20,7 @@ const RegistrationPage = () => {
   };
   return (
     <div className="registration-page">
-      {message}
+      <h3>{message}</h3>
       {errorMessage}
       <div>
         <h4>Имя*</h4>

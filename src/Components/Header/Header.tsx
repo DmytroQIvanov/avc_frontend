@@ -10,40 +10,37 @@ import find from "../../assets/find.svg";
 import backet from "../../assets/header-backet.svg";
 import { useState } from "react";
 import NotificationPanel from "../NotificationPanel/NotificationPanel";
-import BurgerSidePanel from "../BurgetSidePanel/BurgerSidePanel";
 import logo from "../../assets/logo.svg";
 import ukraine from "../../assets/ukraine.png";
 import usa from "../../assets/united-states.png";
 
 import bell from "./assets/bell.svg";
+import search from "./assets/search.svg";
 import "./Header.sass";
 import { ModalHeaderLanguage } from "./ModalHeaderLanguage/ModalHeaderLanguage";
+import {
+  mobileburgerSidePanel,
+  mobileSearch as dispatchMobileSearch,
+} from "../../store/Slices/modalSlice";
 
 export const Header = () => {
   const { t, i18n } = useTranslation();
   const key = useSelector((state: RootState) => state.products.key);
   const user = useSelector((state: RootState) => state.user.user);
   const language = useSelector((state: RootState) => state.user.language);
-  const orderProducts = useSelector(
-    (state: RootState) => state.user.user?.basketLength
-  );
+  const basket = useSelector((state: RootState) => state.user.user?.basket);
   const dispatch = useDispatch();
   const [modalLanguage, setModalLanguage] = useState(false);
   const [notificationPanel, setNotificationPanel] = useState(false);
-  const [burgerSidePanel, setBurgerSidePanel] = useState(false);
 
   return (
     <div>
-      {modalLanguage && (
-        <ModalHeaderLanguage setModalLanguage={setModalLanguage} />
-      )}
-
+      <ModalHeaderLanguage
+        setModalLanguage={setModalLanguage}
+        modalLanguage={modalLanguage}
+      />
       <div className={"header__block"} />
       <header className="header">
-        <BurgerSidePanel
-          burgerSidePanel={burgerSidePanel}
-          setBurgerSidePanel={setBurgerSidePanel}
-        />
         <div className="header__container">
           <Link to="/home" className="header__logo-container">
             <img src={logo} alt="avc - logo" />
@@ -52,7 +49,7 @@ export const Header = () => {
             <div>AVC</div>
             <div>TEAM</div>
           </Link>
-          <div style={{ margin: "auto", fontSize: "18px", marginLeft: "0px" }}>
+          <div style={{}} className={"header__number"}>
             +380979197048
           </div>
           <div className="header__input">
@@ -65,21 +62,33 @@ export const Header = () => {
               <img src={find} />
             </Link>
           </div>
+
           <div
             className={"header__burger-menu"}
-            onClick={() => setBurgerSidePanel(!burgerSidePanel)}
+            onClick={() => {
+              dispatch(mobileburgerSidePanel({}));
+            }}
           />
-          <div className="header__icons">
-            <img
-              src={language == "ua" ? ukraine : usa}
-              onClick={() => setModalLanguage(!modalLanguage)}
-              className={"header__language-icon"}
-            />
+          <img
+            src={language == "ua" ? ukraine : usa}
+            onClick={() => setModalLanguage(!modalLanguage)}
+            className={"header__language-icon"}
+          />
 
+          {/*MOBILE ICON*/}
+          <img
+            src={search}
+            onClick={() => {
+              dispatch(dispatchMobileSearch({}));
+            }}
+            className={"header__mobile-search"}
+          />
+
+          <div className="header__icons">
             <Link to="/basket" className="header__busket-container">
               <img src={backet} />
               {user && (
-                <span className="header__busket-count">{orderProducts}</span>
+                <span className="header__busket-count">{basket?.length}</span>
               )}
             </Link>
             <div className="header__busket-container">
@@ -89,6 +98,11 @@ export const Header = () => {
                   setNotificationPanel(!notificationPanel);
                 }}
               />
+              {user && user.notifications?.length != 0 && (
+                <span className="header__busket-count">
+                  {user.notifications?.length}
+                </span>
+              )}
               {notificationPanel && (
                 <NotificationPanel
                   setNotificationPanel={setNotificationPanel}
@@ -97,10 +111,13 @@ export const Header = () => {
             </div>
             {user ? (
               <>
-                <div className="header__name-container">
+                <Link
+                  to={`/user/${user.id}`}
+                  className="header__name-container"
+                >
                   <div>{user.firstName}</div>
                   <div>{user.lastName}</div>
-                </div>
+                </Link>
                 <img
                   src={logout}
                   alt={"logout"}

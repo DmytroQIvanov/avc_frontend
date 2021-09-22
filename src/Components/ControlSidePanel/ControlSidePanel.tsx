@@ -1,29 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ControlSidePanel.sass";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { setProductsTypes } from "../../store/Slices/productsSlice";
+import { getSideBarLengthStart } from "../../store/Slices/sideBarSlice";
+import { useTranslation } from "react-i18next";
+import { mobileControlSodePanel } from "../../store/Slices/modalSlice";
 
 const ControlSidePanel = (props: any) => {
-  const { visibilitySidePanel, setVisibilitySidePanel } = props;
-  const user = useSelector((state: RootState) => state.user.user);
-  const dispatch = useDispatch();
-  const [state, setState] = useState({
-    categories: {
-      sportNutrition: { protein: false, bcaa: false, gainer: false },
-    },
-    s: "s",
+  const [input, setInput] = useState({
+    protein: true,
+    gainer: true,
+    bcaa: true,
   });
+  const [array, setArray] = useState<string[]>(["protein", "bcaa", "gainer"]);
+  const dispatch = useDispatch();
+  const sidebar = useSelector(
+    (state: RootState) => state.sidebar.sidebarLength
+  );
+  const visibilitySidePanel = useSelector(
+    (state: RootState) => state.modal.mobileControlSidePanel
+  );
+  useEffect(() => {
+    dispatch(setProductsTypes(array));
+  }, [input]);
 
-  return (
-    <>
-      <div
-        className={
-          visibilitySidePanel
-            ? "burger-side-panel__overlay_active"
-            : "burger-side-panel__overlay_hidden"
+  useEffect(() => {
+    dispatch(getSideBarLengthStart({ url: "/product/sidebar" }));
+  }, []);
+
+  const on = (type: "protein" | "bcaa" | "gainer") => {
+    if (array.indexOf(type) == -1) {
+      setArray([...array, type]);
+    } else {
+      const result = array.map((elem) => {
+        if (elem != type) {
+          return elem;
         }
-        onClick={() => setVisibilitySidePanel(false)}
+        return "";
+      });
+      setArray(result);
+    }
+    setInput({ ...input, [type]: !input[type] });
+  };
+  const { t, i18n } = useTranslation();
+  return (
+    <aside>
+      <div
+        className={visibilitySidePanel ? "overlay_active" : "overlay_hidden"}
+        onClick={() => dispatch(mobileControlSodePanel({}))}
       ></div>
       <div
         className={`${
@@ -33,32 +58,45 @@ const ControlSidePanel = (props: any) => {
         } control-side-panel `}
       >
         <ul>
-          <a>По категориям</a>
-          <ul>
-            <a>Спортивное питание</a>
-            <li onClick={(elem) => console.log(elem)}>Протеин</li>
-            <li>BCAA</li>
-            <li>Гейнер</li>
-          </ul>
-          <ul>
-            <a>Екiпiрування</a>
-            <li>Гейнер</li>
-            <li>Гейнер</li>
-            <li>Гейнер</li>
-          </ul>
-          <ul>
-            <a>Одяг</a>
-            <li>Футболки</li>
-          </ul>
+          <h3>{t("nav-bar.sportsnutrition")}</h3>
+          <li>
+            {t("products.protein")} ({sidebar.protein})
+            <button
+              name="protein"
+              value="protein"
+              className={`sidebar__input-square ${input.protein && "active"}`}
+              onClick={() => on("protein")}
+            ></button>
+          </li>
+
+          <li>
+            {t("products.gainer")} ({sidebar.gainer})
+            <button
+              name="gainer"
+              className={`sidebar__input-square ${input.gainer && "active"}`}
+              onClick={() => on("gainer")}
+            ></button>
+          </li>
+          <li>
+            {t("products.BCAA")} ({sidebar.bcaa})
+            <button
+              name="bcaa"
+              className={`sidebar__input-square ${input.bcaa && "active"}`}
+              onClick={() => on("bcaa")}
+            ></button>
+          </li>
         </ul>
         <ul>
-          <a>В наличии</a>
-          <li>В наличии</li>
+          <h3>{t("nav-bar.equipment")}</h3>
         </ul>
-        <ul>По производителям</ul>
-        <ul>По цене</ul>
+        <ul>
+          <h3>{t("nav-bar.clothing")}</h3>
+        </ul>
+        <ul>
+          <h3>{t("nav-bar.vitamins")}</h3>
+        </ul>
       </div>
-    </>
+    </aside>
   );
 };
 

@@ -7,8 +7,18 @@ export interface IUser {
   id: string;
   basketLength: number;
   basket: IOrderProduct[];
-  notifications: { name: string; content: string; date: string }[];
-  orders: IOrderProduct[][];
+  notifications: {
+    notificationNameUA: string;
+    contentUA: string;
+    createDateTime: string;
+  }[];
+  orders: IOrder[];
+}
+export interface IOrder {
+  orderedAt: any;
+  status: string;
+  orderProducts: IOrderProduct[];
+  orderNotes: string;
 }
 
 interface IOrderProduct {

@@ -23,6 +23,7 @@ const initialState: ProductsState = {
     bcaa: 0,
     gainer: 0,
     protein: 0,
+    smartVater: 0,
   },
 };
 

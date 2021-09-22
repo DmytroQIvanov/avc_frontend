@@ -16,7 +16,11 @@ const AdminAddPosts = () => {
     <div>
       <div>
         <p>Name</p>
-        <input onChange={(elem) => setName(elem.target.value)} value={name} />
+        <input
+          onChange={(elem) => setName(elem.target.value)}
+          value={name}
+          className={"default-input"}
+        />
       </div>
       <div>
         <p>Content</p>
@@ -24,6 +28,7 @@ const AdminAddPosts = () => {
           onChange={(elem) => setContent(elem.target.value)}
           value={content}
           type="textarea"
+          className={"default-input"}
         />
       </div>
       <button
@@ -36,8 +41,9 @@ const AdminAddPosts = () => {
             })
           );
         }}
+        className={"yellow-button"}
       >
-        Add Product
+        Add Post
       </button>
     </div>
   );

@@ -10,4 +10,6 @@ export interface IProduct {
   url1: string;
   url2: string;
   url3: string;
+  arrayOfWeight: [];
+  arrayOfTaste: [];
 }

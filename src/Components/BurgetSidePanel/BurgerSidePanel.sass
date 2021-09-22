@@ -6,38 +6,24 @@
   position: absolute
   right: 0px
   visibility: hidden
+
 .burger-side-panel_active
   width: 45%
   transition-duration: .3s
   height: 100%
 
-//OVERLAY
-.burger-side-panel__overlay_active
-  width: 100vw
-  height: 100vh
-  position: absolute
-  background-color: rgba(35, 35, 35, 0.4)
-  z-index: 10
-  transition-duration: .3s
-.burger-side-panel__overlay_hidden
-  width: 100vw
-  height: 100vh
-  position: absolute
-  background-color: rgba(35, 35, 35, 0.4)
-  z-index: 10
-  transition-duration: .3s
-  opacity: 0%
-  visibility: hidden
-
 .burger-side-panel
       right: 0px
-      z-index: 11
       background-color: rgba(16, 16, 16, 0.86)
       position: fixed
       display: flex
       flex-direction: column
       backdrop-filter: blur(1px)
       font-size: 0.8em
+      z-index: 10
+      ul
+        li
+        list-style: none
       a
         text-align: left
         font-weight: 900

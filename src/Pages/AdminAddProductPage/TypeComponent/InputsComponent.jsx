@@ -1,28 +1,47 @@
-import {useState } from "react"
-import './InputsComponent.sass'
+import { useState } from "react";
+import "./InputsComponent.sass";
+import { useDispatch } from "react-redux";
+import {
+  addArrayOfTaste,
+  addArrayOfWeight,
+} from "../../../store/Slices/productSlice";
 
-export const InputsComponent =()=>{
-    let [countOfInputs,setCountOfInputs] = useState(4)
-    let Data =[]
-    const [data2,setData]=useState([])
-        for(let i = 0; i <= countOfInputs; i++ ){
-            Data.push(
-            <input placeholder={i} value={data2[i]} key={i} onChange={(elem)=>{
-                const newArray =data2;
-                    newArray[i] = elem.target.value
-                    setData(newArray)
-            }} className="inputs-component__input"/>)
-    }
-    
-    return(
-        <div className="inputs-component">
-            <div className="inputs-component__inputs-container">{Data}</div>
-            <button onClick={()=>{
-            console.log(countOfInputs)
-            setCountOfInputs(countOfInputs+1)
-            console.log(countOfInputs)
-            }}> + </button>
-        </div>
-            
-    )
-}
+export const InputsComponent = (props) => {
+  const { point } = props;
+  const dispatch = useDispatch();
+  let [countOfInputs, setCountOfInputs] = useState(1);
+  let arrayOfInputs = [];
+  const [data, setData] = useState([]);
+  for (let i = 0; i <= countOfInputs; i++) {
+    arrayOfInputs.push(
+      <input
+        placeholder={1 + i}
+        value={data[i]}
+        key={i}
+        onChange={(elem) => {
+          const newArray = data;
+          newArray[i] = elem.target.value;
+          setData(newArray);
+          if (point == "weight")
+            dispatch(addArrayOfWeight({ data: newArray[i], i }));
+          if (point == "taste")
+            dispatch(addArrayOfTaste({ data: newArray[i], i }));
+        }}
+        className="inputs-component__input default-input"
+      />
+    );
+  }
+
+  return (
+    <div className="inputs-component">
+      <div className="inputs-component__inputs-container">{arrayOfInputs}</div>
+      <button
+        onClick={() => {
+          setCountOfInputs(countOfInputs + 1);
+        }}
+      >
+        +
+      </button>
+    </div>
+  );
+};

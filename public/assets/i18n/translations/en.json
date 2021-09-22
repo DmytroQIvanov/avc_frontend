@@ -30,5 +30,13 @@
     "products.nothingFound": "Nothing found",
     "products.protein": "Protein",
     "products.gainer": "Gainer",
-    "products.BCAA": "BCAA"
+    "products.BCAA": "BCAA",
+
+
+    "mobile-control-bar.filters": "Filters",
+    "mobile-control-bar.byPrice": "By price",
+
+    "mobile-side-bar.basket": "Basket",
+    "mobile-side-bar.log-out": "Logout",
+    "mobile-side-bar.about-us": "About us"
 }

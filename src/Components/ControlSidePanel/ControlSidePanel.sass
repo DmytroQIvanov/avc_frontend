@@ -2,12 +2,15 @@
 .control-side-panel_hidden
   width: 0px
   transition-duration: .3s
-  height: 0%
-  //position: fixed
+  height: 100%
   left: 0px
   visibility: hidden
   top: 0px
   display: none
+  ul
+    visibility: hidden
+
+
 .control-side-panel_active
   width: 45%
   transition-duration: .3s
@@ -15,7 +18,25 @@
   z-index: 10000
   position: absolute
   top: 0px
+  visibility: visible
 
+  ul
+    visibility: visible
+
+.sidebar__input-square
+  position: absolute
+  right:20px
+  cursor: pointer
+  margin-left: 5px
+  border: none
+  width: 25px
+  height: 25px
+  background: rgba(234, 150, 24, 0.8)
+  border-radius: 4px
+  transition-duration: .2s
+
+.sidebar__input-square.active
+  background: rgba(154, 234, 24, 0.8)
 //OVERLAY
 .burger-side-panel__overlay_active
   top: 0px
@@ -45,7 +66,9 @@
       backdrop-filter: blur(1px)
       font-size: 0.8em
       ul
+        //margin: 25px
         li
+          margin: 15px
           //display: none
 
       a

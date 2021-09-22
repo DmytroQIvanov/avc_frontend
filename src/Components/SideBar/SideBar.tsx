@@ -12,8 +12,14 @@ export const SideBar = () => {
     protein: true,
     gainer: true,
     bcaa: true,
+    smartVater: true,
   });
-  const [array, setArray] = useState<string[]>(["protein", "bcaa", "gainer"]);
+  const [array, setArray] = useState<string[]>([
+    "protein",
+    "bcaa",
+    "gainer",
+    "smartVater",
+  ]);
   const dispatch = useDispatch();
   const sidebar = useSelector(
     (state: RootState) => state.sidebar.sidebarLength
@@ -26,7 +32,7 @@ export const SideBar = () => {
     dispatch(getSideBarLengthStart({ url: "/product/sidebar" }));
   }, []);
 
-  const on = (type: "protein" | "bcaa" | "gainer") => {
+  const on = (type: "protein" | "bcaa" | "gainer" | "smartVater") => {
     if (array.indexOf(type) == -1) {
       setArray([...array, type]);
     } else {
@@ -45,7 +51,7 @@ export const SideBar = () => {
   return (
     <aside className="sidebar">
       <ul>
-        <h1>{t("nav-bar.sportsnutrition")}</h1>
+        <h3>{t("nav-bar.sportsnutrition")}</h3>
         <li>
           {t("products.protein")} ({sidebar.protein})
           <button
@@ -72,15 +78,23 @@ export const SideBar = () => {
             onClick={() => on("bcaa")}
           ></button>
         </li>
+        <li>
+          Smart Vater ({sidebar.smartVater})
+          <button
+            name="smartVater"
+            className={`sidebar__input-square ${input.smartVater && "active"}`}
+            onClick={() => on("smartVater")}
+          ></button>
+        </li>
       </ul>
       <ul>
-        <h1>{t("nav-bar.equipment")}</h1>
+        <h3>{t("nav-bar.equipment")}</h3>
       </ul>
       <ul>
-        <h1>{t("nav-bar.clothing")}</h1>
+        <h3>{t("nav-bar.clothing")}</h3>
       </ul>
       <ul>
-        <h1>{t("nav-bar.vitamins")}</h1>
+        <h3>{t("nav-bar.vitamins")}</h3>
       </ul>
     </aside>
   );

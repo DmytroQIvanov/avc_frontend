@@ -9,7 +9,7 @@ export const NavBar = () => {
 
   return (
     <div className={""}>
-      <div className={"nav-bar__block"}></div>
+      {/*<div className={"nav-bar__block"}></div>*/}
       <nav className="nav-bar">
         {/* <div className="nav-bar__mobile-burger">---</div> */}
         <div className="nav-bar__container">

@@ -3,16 +3,21 @@
     position: relative
     min-height: 80vh
     @media only screen and (max-width: 768px)
-        flex-wrap: wrap
+        flex-direction: column
+
 
     .products-page__container
         display: flex
         width: 100%
+        height: fit-content
         flex-wrap: wrap
         overflow: hidden
         justify-content: center
         margin-left: auto
         margin-right: auto
+        margin-top: 5px
+        margin-right: 20px
+        flex-direction: row
 
         @media only screen and (max-width: 768px)
-            //margin: auto
+            margin-right: 0px

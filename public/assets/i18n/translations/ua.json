@@ -32,6 +32,12 @@
     "products.nothingFound": "Нічого не знайдено",
     "products.protein": "Протеїн",
     "products.gainer": "Гейнер",
-    "products.BCAA": "BCAA"
+    "products.BCAA": "BCAA",
 
+    "mobile-control-bar.filters": "Фільтри",
+    "mobile-control-bar.byPrice": "За ціною",
+
+    "mobile-side-bar.basket": "Корзина",
+    "mobile-side-bar.log-out": "Вийти",
+    "mobile-side-bar.about-us": "О нас"
   }

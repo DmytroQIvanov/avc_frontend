@@ -3,26 +3,40 @@ import { lazy } from "react";
 import { Redirect } from "react-router-dom";
 import { BottomPanel } from "./Components/BottomPanel/BottomPanel";
 import { Header } from "./Components/Header/Header";
-import MobileControlBar from "./Components/MobileControlBar/MobileControlBar";
 import { NavBar } from "./Components/NavBar/NavBar";
-import AdminLoginPage from "./Pages/AdminLoginPage/AdminLoginPage";
-import BasketPage from "./Pages/BasketPage/BasketPage";
 import { MainPage } from "./Pages/MainPage/MainPage";
-import PostPage from "./Pages/PostPage/PostPage";
-import PostsPage from "./Pages/PostsPage/PostsPage";
-import ProductsPage from "./Pages/ProductsPage/ProductsPage";
-import RegistrationPage from "./Pages/RegistrationPage/RegistrationPage";
-import OrderPage from "./Pages/OrderPage/OrderPage";
+import { SubNavBar } from "./Components/SubNavBar/SubNavBar";
 
 //Lazy Loading
 const LoginPage = lazy(() => import("./Pages/LoginPage/LoginPage"));
 const ProductPage = lazy(() => import("./Pages/ProductPage/ProductPage"));
 
+const UserMenu = lazy(() => import("./Pages/UserMenu/UserMenu"));
+const OrderPage = lazy(() => import("./Pages/OrderPage/OrderPage"));
+const ProductsPage = lazy(() => import("./Pages/ProductsPage/ProductsPage"));
+const PostsPage = lazy(() => import("./Pages/PostsPage/PostsPage"));
+const PostPage = lazy(() => import("./Pages/PostPage/PostPage"));
+const MobileControlBar = lazy(
+  () => import("./Components/MobileControlBar/MobileControlBar")
+);
+const RegistrationPage = lazy(
+  () => import("./Pages/RegistrationPage/RegistrationPage")
+);
+const AdminLoginPage = lazy(
+  () => import("./Pages/AdminLoginPage/AdminLoginPage")
+);
+const BasketPage = lazy(() => import("./Pages/BasketPage/BasketPage"));
+
 const routes = [
   {
     path: "/products",
     exact: true,
-    navbar: () => <Header />,
+    navbar: () => (
+      <>
+        <Header />
+        <SubNavBar />
+      </>
+    ),
     bottomPanel: () => <BottomPanel />,
     main: () => <ProductsPage />,
   },
@@ -32,10 +46,8 @@ const routes = [
     navbar: () => (
       <>
         <Header />
-        <MobileControlBar />
       </>
     ),
-    // bottomPanel: () => <BottomPanel />,
     main: () => <OrderPage />,
   },
   {
@@ -43,11 +55,12 @@ const routes = [
     exact: true,
     navbar: () => (
       <>
-        <Header />
+        {/*<Header />*/}
         <NavBar />
       </>
     ),
     main: () => <MainPage />,
+    bottomPanel: () => <BottomPanel />,
   },
   {
     path: "/posts",
@@ -72,7 +85,7 @@ const routes = [
     main: () => <PostPage />,
   },
   {
-    path: ["/admin/login", "/admin"],
+    path: ["/admin/login", "/admin", "/admin/*"],
     exact: true,
     navbar: () => <></>,
     main: () => <AdminLoginPage />,
@@ -118,6 +131,17 @@ const routes = [
       </>
     ),
     main: () => <BasketPage />,
+  },
+  {
+    path: "/user/:id",
+    exact: true,
+    navbar: () => (
+      <>
+        <Header />
+        <NavBar />
+      </>
+    ),
+    main: () => <UserMenu />,
   },
   {
     path: "*",

@@ -10,13 +10,14 @@ import MobileControlBar from "../../Components/MobileControlBar/MobileControlBar
 import ControlSidePanel from "../../Components/ControlSidePanel/ControlSidePanel";
 import { useTranslation } from "react-i18next";
 
-const ProductsPage = () => {
+const ProductsPage = (props: any) => {
   const products = useSelector((state: RootState) => state.products.products);
   const key = useSelector((state: RootState) => state.products.key);
   const loading = useSelector((state: RootState) => state.products.loading);
   const types = useSelector((state: RootState) => state.products.types);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
+  const { admin } = props;
 
   const [visibilitySidePanel, setVisibilitySidePanel] = useState(false);
   useEffect(() => {
@@ -32,18 +33,14 @@ const ProductsPage = () => {
 
   return (
     <>
-      <ControlSidePanel
-        visibilitySidePanel={visibilitySidePanel}
-        setVisibilitySidePanel={setVisibilitySidePanel}
-      />
       <div className="products-page">
         {loading && <Loader />}
-        <MobileControlBar setVisibilitySidePanel={setVisibilitySidePanel} />
+        <MobileControlBar />
         <SideBar />
 
         <div className="products-page__container">
           {products?.map((elem) => (
-            <Product data={elem} key={elem.id} />
+            <Product data={elem} key={elem.id} admin={admin} />
           ))}
           {products.length == 0 && !loading && (
             <h3 style={{ marginTop: "50px" }}>{t("products.nothingFound")}</h3>

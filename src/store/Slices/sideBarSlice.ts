@@ -11,6 +11,7 @@ const initialState: SideBarState = {
     bcaa: 0,
     gainer: 0,
     protein: 0,
+    smartVater: 0,
   },
   loading: false,
 };

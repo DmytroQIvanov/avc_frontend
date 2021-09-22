@@ -6,14 +6,12 @@ import { TypeComponent } from "./TypeComponent/TypeComponent";
 import { RootState } from "../../store/store";
 
 const AdminAddProductPage = () => {
-  // const addImage = (file: any) => {
-  //   setImage(file);
-  // };
   const dispatch = useDispatch();
 
   const productType = useSelector(
     (state: RootState) => state.product.productType
   );
+  const array = useSelector((state: RootState) => state.product.createData);
 
   const addProduct = (images: Blob[]) => {
     if (!productType) {
@@ -30,8 +28,9 @@ const AdminAddProductPage = () => {
     data.append("oldPrice", oldPrice);
     data.append("newProduct", newProduct.toString());
     data.append("ration", "33");
-    data.append("inStock", "false");
     data.append("type", productType);
+    data.append("arrayOfWeight", array.arrayOfWeight.toString());
+    data.append("arrayOfTaste", array.arrayOfTaste.toString());
     dispatch(
       getProductStart({ url: "/admin/addProduct", method: "POST", data })
     );
@@ -46,23 +45,26 @@ const AdminAddProductPage = () => {
   const [image2, setImage2] = useState<Blob>();
   const [image3, setImage3] = useState<Blob>();
   return (
-    <div>
+    <div style={{ margin: "10px" }}>
       <div>
         <div>Название товара</div>
         <input
           type="name"
           onChange={(elem) => setName(elem.target.value)}
           value={name}
+          className={"default-input"}
         />
       </div>
 
       <div>
         <div>Описание товара</div>
-        <input
-          type="name"
+        <textarea
           onChange={(elem) => {
             setDescription(elem.target.value);
           }}
+          value={description}
+          className={"default-input"}
+          style={{ height: "240px", width: "95%" }}
         />
       </div>
 
@@ -74,6 +76,7 @@ const AdminAddProductPage = () => {
             setNumberOfProducts(elem.target.value);
           }}
           value={numberOfProducts}
+          className={"default-input"}
         />
       </div>
 
@@ -84,12 +87,14 @@ const AdminAddProductPage = () => {
           onChange={(elem) => {
             setPrice(elem.target.value);
           }}
+          value={price}
+          className={"default-input"}
         />
       </div>
 
       <div>
         <div>Рейтинг</div>
-        <input type="number" max={11} min={0} />
+        <input type="number" max={11} min={0} className={"default-input"} />
       </div>
       <div>
         <div>Изображение товара - 1</div>
@@ -100,6 +105,7 @@ const AdminAddProductPage = () => {
               setImage1(elem.target.files[0]);
             }
           }}
+          className={"default-input"}
         />
       </div>
 
@@ -112,6 +118,7 @@ const AdminAddProductPage = () => {
               setImage2(elem.target.files[0]);
             }
           }}
+          className={"default-input"}
         />
       </div>
       <div>
@@ -123,6 +130,7 @@ const AdminAddProductPage = () => {
               setImage3(elem.target.files[0]);
             }
           }}
+          className={"default-input"}
         />
       </div>
 
@@ -137,6 +145,7 @@ const AdminAddProductPage = () => {
             addProduct([image1, image2, image3]);
           }
         }}
+        className={"yellow-button"}
       >
         Создать
       </button>

@@ -1,11 +1,12 @@
 import { IUser } from "../../Interfaces/IUser";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface CounterState {
   user: IUser | null;
   loading: boolean;
   firstFetch: boolean;
   language: string;
+  productView: string;
   errorMessage: string | null;
 }
 
@@ -14,6 +15,7 @@ const initialState: CounterState = {
   loading: false,
   firstFetch: false,
   errorMessage: null,
+  productView: "square",
   language: "ru",
 };
 
@@ -37,6 +39,30 @@ export const userSlice = createSlice({
     userChangeLanguage: (state, data) => {
       state.language = data.payload;
     },
+    userChangeProductView: (state, data) => {
+      state.productView = data.payload;
+      localStorage.setItem("productView", data.payload);
+    },
+    changeOrderQuantity(state, data) {
+      state.user?.basket.map((elem) => {
+        if (elem.ID == data.payload.data.orderId) {
+          if (elem.quantity + data.payload.data.changedQuantity <= 0) {
+            elem.quantity = 0;
+            return;
+          }
+          elem.quantity += data.payload.data.changedQuantity;
+          return;
+        }
+      });
+    },
+    deleteOrderProduct(state, data) {
+      state.user?.basket.map((elem, indx) => {
+        if (elem.ID == data.payload.data.orderId) {
+          state.user?.basket.splice(indx, 1);
+          return;
+        }
+      });
+    },
   },
 });
 
@@ -46,6 +72,9 @@ export const {
   userLoginStart,
   userLoginSuccess,
   userChangeLanguage,
+  userChangeProductView,
+  changeOrderQuantity,
+  deleteOrderProduct,
 } = userSlice.actions;
 
 export default userSlice.reducer;

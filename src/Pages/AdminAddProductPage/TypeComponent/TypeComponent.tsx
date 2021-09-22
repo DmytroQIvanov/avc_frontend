@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { InputsComponent } from "./InputsComponent";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+import { useDispatch } from "react-redux";
 import { setProductType } from "../../../store/Slices/productSlice";
 
 export const TypeComponent = () => {
@@ -29,6 +28,13 @@ export const TypeComponent = () => {
       ],
     },
     {
+      name: "smartVater",
+      additionalFields: [
+        { array: true, name: "weight" },
+        { array: true, name: "taste" },
+      ],
+    },
+    {
       name: "gainer",
       additionalFields: [
         // { array: true, name: "weight" },
@@ -44,14 +50,27 @@ export const TypeComponent = () => {
       ) : (
         <div>Not choosen </div>
       )}
-      <button onClick={() => setActive(!active)}>Choose</button>
+      <button
+        onClick={() => setActive(!active)}
+        className={"grey-button"}
+        style={{ cursor: "pointer" }}
+      >
+        Choose
+      </button>
       {active &&
         typesRout.map((elem, id) => (
           <div
             onClick={() => {
-              dispatch(setProductType(currentType.name));
               setCurrentType({ id, name: elem.name });
+              dispatch(setProductType(elem.name));
               setActive(false);
+            }}
+            style={{
+              padding: "10px",
+              backgroundColor: "#3339",
+              borderRadius: "10px",
+              marginTop: "10px",
+              cursor: "pointer",
             }}
           >
             {elem.name}
@@ -63,7 +82,7 @@ export const TypeComponent = () => {
           {typesRout[currentType.id].additionalFields.map((elem) => (
             <div>
               <h2>{elem.name}</h2>
-              <InputsComponent />
+              <InputsComponent point={elem.name} />
             </div>
           ))}
         </div>

@@ -7,6 +7,8 @@ import productReducer from "./Slices/productSlice";
 import userSlice from "./Slices/userSlice";
 import sideBarSlice from "./Slices/sideBarSlice";
 import PostsSlice from "./Slices/postSlice";
+import UsersSlice from "./Slices/usersSlice";
+import ModalSlice from "./Slices/modalSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -16,14 +18,14 @@ export const store = configureStore({
     products: productsReducer,
     product: productReducer,
     user: userSlice,
+    users: UsersSlice,
     sidebar: sideBarSlice,
     posts: PostsSlice,
+    modal: ModalSlice,
   },
   middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
 });
 
 sagaMiddleware.run(watcherSaga);
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

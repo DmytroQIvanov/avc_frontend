@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import "./MainPage.sass";
 import isa from "./assets/225142156_507844300448740_3792213247938164490_n.jpg";
 import background from "./../../assets/main_Image.png";
+import logo from "../../assets/logo.svg";
+import firstImg from "./assets/IMG_9379.jpg";
+import secondImg from "./assets/IMG_9393.jpg";
 
 export const MainPage = () => {
   const { t, i18n } = useTranslation();
@@ -18,7 +21,9 @@ export const MainPage = () => {
 
   return (
     <div className="main-page">
-      <img src={background} className={"main-page__background"} />
+      <div className={"main-page__background-container"}>
+        <img src={background} className={"main-page__background"} />
+      </div>
       <section className={"main-page__first-block"}>
         <h1>{t("main.title")}</h1>
         <div className={"main-page__description"}>{t("main.description")}</div>
@@ -36,22 +41,29 @@ export const MainPage = () => {
           </button>
         </Link>
       </section>
+      <section className={"main-page__second-block"}>
+        <div className={"second-block__logo-container"}>
+          <span>AVC - спонсор твоїх спортивних досягнень!</span>
+          <img src={logo} className={"second-block__logo"} />
+        </div>
+        <img src={firstImg} className={"second-block__img1"} />
+        <img src={secondImg} className={"second-block__img2"} />
+      </section>
 
-      <Carousel
-        infiniteLoop={true}
-        showThumbs={false}
-        showStatus={false}
-        centerMode={true}
-        // centerSlidePercentage={50}
-        autoPlay={true}
-        interval={7500}
-      >
-        {carouselArray.map((elem) => (
-          <div style={{ width: "400px", margin: "auto" }}>
-            <img src={elem.img} />
-          </div>
-        ))}
-      </Carousel>
+      {/*<Carousel*/}
+      {/*  infiniteLoop={true}*/}
+      {/*  showThumbs={false}*/}
+      {/*  showStatus={false}*/}
+      {/*  centerMode={true}*/}
+      {/*  autoPlay={true}*/}
+      {/*  interval={7500}*/}
+      {/*>*/}
+      {/*  {carouselArray.map((elem) => (*/}
+      {/*    <div style={{ width: "400px", margin: "auto" }}>*/}
+      {/*      <img src={elem.img} />*/}
+      {/*    </div>*/}
+      {/*  ))}*/}
+      {/*</Carousel>*/}
     </div>
   );
 };
