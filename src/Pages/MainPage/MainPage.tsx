@@ -1,10 +1,8 @@
 import { useTranslation } from "react-i18next";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
-import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 import "./MainPage.sass";
-import isa from "./assets/225142156_507844300448740_3792213247938164490_n.jpg";
 import background from "./../../assets/main_Image.png";
 import logo from "../../assets/logo.svg";
 import firstImg from "./assets/IMG_9379.jpg";
@@ -13,17 +11,16 @@ import secondImg from "./assets/IMG_9393.jpg";
 export const MainPage = () => {
   const { t, i18n } = useTranslation();
 
-  const carouselArray = [
-    { img: isa, text: "Lol" },
-    { img: isa, text: "Lol2" },
-    { img: isa, text: "Lol3" },
-  ];
-
   return (
     <div className="main-page">
+      {/*MAIN IMAGE*/}
+
       <div className={"main-page__background-container"}>
         <img src={background} className={"main-page__background"} />
       </div>
+
+      {/*FIRST BLOCK */}
+
       <section className={"main-page__first-block"}>
         <h1>{t("main.title")}</h1>
         <div className={"main-page__description"}>{t("main.description")}</div>
@@ -41,6 +38,9 @@ export const MainPage = () => {
           </button>
         </Link>
       </section>
+
+      {/*SECOND BLOCK*/}
+
       <section className={"main-page__second-block"}>
         <div className={"second-block__logo-container"}>
           <span>AVC - спонсор твоїх спортивних досягнень!</span>

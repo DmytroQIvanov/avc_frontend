@@ -10,6 +10,8 @@ import AdminPage from "./Pages/AdminPage/AdminPage";
 import AdminPosts from "./Pages/AdminPosts/AdminAddPosts";
 import AdminAddPosts from "./Pages/AdminPosts/AdminAddPosts";
 import AdminUsersPage from "./Pages/AdminUsersPage/AdminUsersPage";
+import AdminProductUpdate from "./Pages/AdminProductUpdate/AdminProductUpdate";
+import AdminOrdersPage from "./Pages/AdminOrdersPage/AdminOrdersPage";
 
 const AdminRout = () => {
   return (
@@ -18,11 +20,18 @@ const AdminRout = () => {
         <Route path="/admin/addProduct">
           <AdminAddProductPage />
         </Route>
+        <Route path="/admin/updateProduct/:id">
+          <AdminProductUpdate />
+        </Route>
         <Route path="/admin/addPost">
           <AdminAddPosts />
         </Route>
         <Route path="/admin/posts">
           <AdminAddProductPage />
+        </Route>
+
+        <Route path="/admin/orders">
+          <AdminOrdersPage />
         </Route>
 
         <Route path="/admin/users">

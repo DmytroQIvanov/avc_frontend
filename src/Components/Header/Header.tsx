@@ -11,8 +11,8 @@ import backet from "../../assets/header-backet.svg";
 import { useState } from "react";
 import NotificationPanel from "../NotificationPanel/NotificationPanel";
 import logo from "../../assets/logo.svg";
-import ukraine from "../../assets/ukraine.png";
-import usa from "../../assets/united-states.png";
+import userIMG from "./assets/user.svg";
+import heart from "./assets/heart.svg";
 
 import bell from "./assets/bell.svg";
 import search from "./assets/search.svg";
@@ -27,7 +27,6 @@ export const Header = () => {
   const { t, i18n } = useTranslation();
   const key = useSelector((state: RootState) => state.products.key);
   const user = useSelector((state: RootState) => state.user.user);
-  const language = useSelector((state: RootState) => state.user.language);
   const basket = useSelector((state: RootState) => state.user.user?.basket);
   const dispatch = useDispatch();
   const [modalLanguage, setModalLanguage] = useState(false);
@@ -69,11 +68,11 @@ export const Header = () => {
               dispatch(mobileburgerSidePanel({}));
             }}
           />
-          <img
-            src={language == "ua" ? ukraine : usa}
-            onClick={() => setModalLanguage(!modalLanguage)}
-            className={"header__language-icon"}
-          />
+          {/*<img*/}
+          {/*  src={language == "ua" ? ukraine : usa}*/}
+          {/*  onClick={() => setModalLanguage(!modalLanguage)}*/}
+          {/*  className={"header__language-icon"}*/}
+          {/*/>*/}
 
           {/*MOBILE ICON*/}
           <img
@@ -85,13 +84,20 @@ export const Header = () => {
           />
 
           <div className="header__icons">
-            <Link to="/basket" className="header__busket-container">
+            <Link to="/basket" className="header__basket-container">
               <img src={backet} />
               {user && (
-                <span className="header__busket-count">{basket?.length}</span>
+                <span className="header__basket-count">{basket?.length}</span>
               )}
             </Link>
-            <div className="header__busket-container">
+            <Link
+              to={"/favourite"}
+              className={"header__favourites-container header__icon"}
+            >
+              <img src={heart} />
+            </Link>
+
+            <div className="header__basket-container">
               <img
                 src={bell}
                 onClick={() => {
@@ -99,7 +105,7 @@ export const Header = () => {
                 }}
               />
               {user && user.notifications?.length != 0 && (
-                <span className="header__busket-count">
+                <span className="header__basket-count">
                   {user.notifications?.length}
                 </span>
               )}
@@ -111,6 +117,9 @@ export const Header = () => {
             </div>
             {user ? (
               <>
+                <Link to={`/user/${user.id}`} className="header__icon">
+                  <img src={userIMG} />
+                </Link>
                 <Link
                   to={`/user/${user.id}`}
                   className="header__name-container"
@@ -118,6 +127,7 @@ export const Header = () => {
                   <div>{user.firstName}</div>
                   <div>{user.lastName}</div>
                 </Link>
+
                 <img
                   src={logout}
                   alt={"logout"}

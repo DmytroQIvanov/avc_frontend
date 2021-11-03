@@ -5,14 +5,14 @@ export interface AdminState {
   login: string | null;
   loading: boolean;
   firstFetch: boolean;
-  orders: IOrder[];
+  adminData: { orders: IOrder[] };
 }
 
 const initialState: AdminState = {
   login: null,
   loading: false,
   firstFetch: false,
-  orders: [],
+  adminData: { orders: [] },
 };
 
 export const adminSlice = createSlice({
@@ -31,11 +31,37 @@ export const adminSlice = createSlice({
       state.loading = false;
       state.firstFetch = true;
     },
+
+    adminGetOrdersStart(state, data) {
+      // state.adminData.orders = data.payload;
+    },
+    adminGetOrdersSuccess(state, data) {
+      state.adminData.orders = data.payload;
+    },
+
+    adminDeleteOrderStart(state, data) {
+      // state.adminData.orders.splice(data.payload, 1);
+    },
+    adminDeleteOrder(state, data) {
+      state.adminData.orders.splice(data.payload, 1);
+    },
+
+    adminDeleteUserStart(state, data) {
+      // state.adminData.orders.splice(data.payload, 1);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { adminLoginStart, adminLoginSuccess, adminLoginError } =
-  adminSlice.actions;
+export const {
+  adminLoginStart,
+  adminLoginSuccess,
+  adminLoginError,
+  adminGetOrdersStart,
+  adminGetOrdersSuccess,
+  adminDeleteOrder,
+  adminDeleteOrderStart,
+  adminDeleteUserStart,
+} = adminSlice.actions;
 
 export default adminSlice.reducer;

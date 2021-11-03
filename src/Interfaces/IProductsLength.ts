@@ -1,6 +1,4 @@
 export interface IProductLength {
-  protein: number;
-  gainer: number;
-  bcaa: number;
-  smartVater: number;
+  MegaAminoMix: number;
+  BCAA_L_glutamine: number;
 }

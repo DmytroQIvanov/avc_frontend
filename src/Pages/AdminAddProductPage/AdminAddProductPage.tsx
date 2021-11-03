@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductStart } from "../../store/Slices/productSlice";
+import { ProductVariant } from "./TypeComponent/ProductVariant";
 import { TypeComponent } from "./TypeComponent/TypeComponent";
 import { RootState } from "../../store/store";
 
@@ -11,39 +11,36 @@ const AdminAddProductPage = () => {
   const productType = useSelector(
     (state: RootState) => state.product.productType
   );
-  const array = useSelector((state: RootState) => state.product.createData);
-
+  const productVariant = useSelector(
+    (state: RootState) => state.product.productVariant
+  );
   const addProduct = (images: Blob[]) => {
     if (!productType) {
-      console.log(productType);
       return;
     }
     const data = new FormData();
-    images.forEach((elem, i) => {
-      data.append(`file-${i}`, elem);
-    });
     data.append("name", name);
     data.append("description", description);
     data.append("price", price);
     data.append("oldPrice", oldPrice);
     data.append("newProduct", newProduct.toString());
     data.append("ration", "33");
+    data.append("productVariant", JSON.stringify(productVariant));
     data.append("type", productType);
-    data.append("arrayOfWeight", array.arrayOfWeight.toString());
-    data.append("arrayOfTaste", array.arrayOfTaste.toString());
+    images.forEach((elem, i) => {
+      data.append(`file-${i}`, elem);
+    });
     dispatch(
       getProductStart({ url: "/admin/addProduct", method: "POST", data })
     );
   };
-  const [name, setName] = useState("Proteinn");
-  const [description, setDescription] = useState("smth");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [numberOfProducts, setNumberOfProducts] = useState("0");
-  const [price, setPrice] = useState("333");
+  const [price, setPrice] = useState("0");
   const [oldPrice, setOldPrice] = useState("");
   const [newProduct, setNewProduct] = useState(true);
-  const [image1, setImage1] = useState<Blob>();
-  const [image2, setImage2] = useState<Blob>();
-  const [image3, setImage3] = useState<Blob>();
+  const [images, setImages] = useState<Blob[]>([]);
   return (
     <div style={{ margin: "10px" }}>
       <div>
@@ -80,70 +77,35 @@ const AdminAddProductPage = () => {
         />
       </div>
 
-      <div>
-        <div>Цена товара: </div>
-        <input
-          type="number"
-          onChange={(elem) => {
-            setPrice(elem.target.value);
-          }}
-          value={price}
-          className={"default-input"}
-        />
-      </div>
+      {/*<div>*/}
+      {/*  <div>Цена товара: </div>*/}
+      {/*  <input*/}
+      {/*    type="number"*/}
+      {/*    onChange={(elem) => {*/}
+      {/*      setPrice(elem.target.value);*/}
+      {/*    }}*/}
+      {/*    value={price}*/}
+      {/*    className={"default-input"}*/}
+      {/*  />*/}
+      {/*</div>*/}
 
       <div>
         <div>Рейтинг</div>
         <input type="number" max={11} min={0} className={"default-input"} />
       </div>
-      <div>
-        <div>Изображение товара - 1</div>
-        <input
-          type="file"
-          onChange={(elem) => {
-            if (elem.target.files) {
-              setImage1(elem.target.files[0]);
-            }
-          }}
-          className={"default-input"}
-        />
-      </div>
+
+      <button onClick={() => console.log(images)}>s</button>
 
       <div>
-        <div>Изображение товара - 2</div>
-        <input
-          type="file"
-          onChange={(elem) => {
-            if (elem.target.files) {
-              setImage2(elem.target.files[0]);
-            }
-          }}
-          className={"default-input"}
-        />
-      </div>
-      <div>
-        <div>Изображение товара - 3</div>
-        <input
-          type="file"
-          onChange={(elem) => {
-            if (elem.target.files) {
-              setImage3(elem.target.files[0]);
-            }
-          }}
-          className={"default-input"}
-        />
-      </div>
-
-      <div>
-        <p>Тип</p>
         <TypeComponent />
+      </div>
+      <div>
+        <ProductVariant setImages={setImages} images={images} />
       </div>
 
       <button
         onClick={() => {
-          if (image1 && image2 && image3) {
-            addProduct([image1, image2, image3]);
-          }
+          if (images.length != 0) addProduct(images);
         }}
         className={"yellow-button"}
       >

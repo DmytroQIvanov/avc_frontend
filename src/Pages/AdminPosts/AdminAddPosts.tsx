@@ -24,10 +24,9 @@ const AdminAddPosts = () => {
       </div>
       <div>
         <p>Content</p>
-        <input
+        <textarea
           onChange={(elem) => setContent(elem.target.value)}
           value={content}
-          type="textarea"
           className={"default-input"}
         />
       </div>

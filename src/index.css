@@ -9,6 +9,7 @@ body {
   background-image: url("./assets/noisy-texture-300x300-o9-d17-c-3A3A3A-t1.png");
   background-color: #1D1D1D;
   color: rgb(185, 184, 184);
+  overflow-x: hidden;
 }
 
 code {

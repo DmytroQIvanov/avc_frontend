@@ -3,12 +3,11 @@ import { call, put } from "redux-saga/effects";
 import {
   addArrayOfWeight,
   getProductError,
-  getProductStart,
   getProductSuccess,
   postComment,
 } from "../Slices/productSlice";
 import { request } from "../requests/adminLogin";
-import { deleteOrderProduct } from "../Slices/userSlice";
+import { addProductToBasketSuccess } from "../Slices/userSlice";
 
 export function* handleGetProduct(data: any) {
   try {
@@ -52,4 +51,17 @@ export function* handleAddArrayOfWeight(data: any) {
     );
     yield put(addArrayOfWeight(data.payload.data));
   } catch (error) {}
+}
+
+export function* handleAddProductToBasket(data: any) {
+  yield console.log(data);
+
+  yield put(addProductToBasketSuccess(data.payload));
+
+  yield call(
+    request,
+    `/user/product/${data.payload.data.product.id}`,
+    "POST",
+    data.payload.data
+  );
 }

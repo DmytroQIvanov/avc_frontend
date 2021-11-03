@@ -7,7 +7,6 @@ import { RootState } from "../../store/store";
 import { Product } from "./Product/Product";
 import "./ProductsPage.sass";
 import MobileControlBar from "../../Components/MobileControlBar/MobileControlBar";
-import ControlSidePanel from "../../Components/ControlSidePanel/ControlSidePanel";
 import { useTranslation } from "react-i18next";
 
 const ProductsPage = (props: any) => {
@@ -19,7 +18,6 @@ const ProductsPage = (props: any) => {
   const { t, i18n } = useTranslation();
   const { admin } = props;
 
-  const [visibilitySidePanel, setVisibilitySidePanel] = useState(false);
   useEffect(() => {
     dispatch(
       getProductsStart({
@@ -40,9 +38,9 @@ const ProductsPage = (props: any) => {
 
         <div className="products-page__container">
           {products?.map((elem) => (
-            <Product data={elem} key={elem.id} admin={admin} />
+            <Product product={elem} key={elem.id} admin={admin} />
           ))}
-          {products.length == 0 && !loading && (
+          {products?.length == 0 && !loading && (
             <h3 style={{ marginTop: "50px" }}>{t("products.nothingFound")}</h3>
           )}
         </div>

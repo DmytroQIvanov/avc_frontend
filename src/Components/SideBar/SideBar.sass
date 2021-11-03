@@ -1,7 +1,8 @@
 
 .sidebar
-    width: 300px
-    height: 600px
+    width: 330px
+    min-height: 600px
+    height: fit-content
     background: #202020
     margin-left: 8vw
     border-radius: 16px
@@ -13,13 +14,15 @@
     @media only screen and (max-width: 768px)
         // width: 0%
         display: none
-    a
-        font-size: 1.2em
+    ul
+        padding-left: 15px
+
 
     li
         display: flex
         line-height: 25px
-        padding: 10px
+        padding: 5px
+        padding-left: 2px
         .sidebar__input-square
             position: absolute
             right:20px

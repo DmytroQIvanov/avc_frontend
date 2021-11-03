@@ -32,9 +32,10 @@ export const userSlice = createSlice({
       state.user = data.payload.user;
     },
     userLoginError: (state, data) => {
+      state.errorMessage = data.payload;
       state.firstFetch = true;
       state.loading = false;
-      // state.errorMessage = data.payload.data.message;
+      // state.errorMessage
     },
     userChangeLanguage: (state, data) => {
       state.language = data.payload;
@@ -45,7 +46,7 @@ export const userSlice = createSlice({
     },
     changeOrderQuantity(state, data) {
       state.user?.basket.map((elem) => {
-        if (elem.ID == data.payload.data.orderId) {
+        if (elem.product.name == data.payload.data.name) {
           if (elem.quantity + data.payload.data.changedQuantity <= 0) {
             elem.quantity = 0;
             return;
@@ -57,12 +58,49 @@ export const userSlice = createSlice({
     },
     deleteOrderProduct(state, data) {
       state.user?.basket.map((elem, indx) => {
-        if (elem.ID == data.payload.data.orderId) {
+        if (elem.product.name == data.payload.data.name) {
           state.user?.basket.splice(indx, 1);
           return;
         }
       });
     },
+
+    addProductToBasketStart(state, data) {},
+    addProductToBasketSuccess(state, data) {
+      console.log(data.payload);
+      let original = true;
+      state.user?.basket.map((elem, indx) => {
+        if (elem.product.name == data.payload.data.product.name) {
+          elem.quantity += data.payload.data.quantity;
+          original = false;
+          return;
+        }
+      });
+      if (original) {
+        state.user?.basket.push({
+          product: data.payload.data.product,
+          quantity: data.payload.data.quantity,
+          taste: data.payload.data.taste,
+          weight: data.payload.data.weight,
+        });
+      }
+    },
+
+    addProductToFavouriteStart(state, data) {},
+    addProductToFavouriteSuccess(state, data) {
+      console.log(data.payload);
+      let original = true;
+      state.user?.favourite.map((elem, indx) => {
+        if (elem.name == data.payload.name) {
+          original = false;
+          return;
+        }
+      });
+      if (original) {
+        state.user?.favourite.push(data.payload.product);
+      }
+    },
+    addProductToFavouriteError(state, data) {},
   },
 });
 
@@ -71,10 +109,19 @@ export const {
   userLoginError,
   userLoginStart,
   userLoginSuccess,
+
   userChangeLanguage,
   userChangeProductView,
+
   changeOrderQuantity,
   deleteOrderProduct,
+
+  addProductToBasketStart,
+  addProductToBasketSuccess,
+
+  addProductToFavouriteStart,
+  addProductToFavouriteSuccess,
+  addProductToFavouriteError,
 } = userSlice.actions;
 
 export default userSlice.reducer;

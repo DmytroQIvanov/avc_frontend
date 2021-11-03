@@ -1,7 +1,16 @@
 import { takeLatest } from "redux-saga/effects";
-import { handleAdminLogin } from "./handlers/adminLogin";
+import {
+  handleAdminLogin,
+  handleDeleteORder,
+  handleDeleteUser,
+  handleGetOrders,
+} from "./handlers/admin";
 import { handlePosts } from "./handlers/posts";
-import { handleGetProduct, handlePostComment } from "./handlers/product";
+import {
+  handleAddProductToBasket,
+  handleGetProduct,
+  handlePostComment,
+} from "./handlers/product";
 import {
   handleChangeOrderQuantity,
   handleDeleteOrderProduct,
@@ -9,19 +18,26 @@ import {
 } from "./handlers/products";
 import { handleSideBar } from "./handlers/sideBar";
 import { handleUserLogin } from "./handlers/userLogin";
-import { adminLoginStart } from "./Slices/adminSlice";
+import {
+  adminDeleteOrderStart,
+  adminDeleteUserStart,
+  adminGetOrdersStart,
+  adminLoginStart,
+} from "./Slices/adminSlice";
 import { getPostsStart, getPostStart } from "./Slices/postSlice";
 import { getProductStart, postComment } from "./Slices/productSlice";
 import { getProductsStart } from "./Slices/productsSlice";
 import { getSideBarLengthStart } from "./Slices/sideBarSlice";
 import {
+  addProductToBasketStart,
+  addProductToFavouriteStart,
   changeOrderQuantity,
   deleteOrderProduct,
   userLoginStart,
 } from "./Slices/userSlice";
 import { handlePost } from "./handlers/post";
 import { getUsersStart } from "./Slices/usersSlice";
-import { handleUsers } from "./handlers/users";
+import { handleAddProductToFavourite, handleUsers } from "./handlers/users";
 
 export function* watcherSaga() {
   yield takeLatest(getProductsStart, handleGetProducts);
@@ -35,4 +51,11 @@ export function* watcherSaga() {
   yield takeLatest(changeOrderQuantity, handleChangeOrderQuantity);
   yield takeLatest(deleteOrderProduct, handleDeleteOrderProduct);
   yield takeLatest(postComment, handlePostComment);
+  yield takeLatest(addProductToBasketStart, handleAddProductToBasket);
+
+  yield takeLatest(addProductToFavouriteStart, handleAddProductToFavourite);
+
+  yield takeLatest(adminGetOrdersStart, handleGetOrders);
+  yield takeLatest(adminDeleteUserStart, handleDeleteUser);
+  yield takeLatest(adminDeleteOrderStart, handleDeleteORder);
 }

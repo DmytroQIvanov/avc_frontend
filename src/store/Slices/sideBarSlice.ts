@@ -8,10 +8,12 @@ interface SideBarState {
 
 const initialState: SideBarState = {
   sidebarLength: {
-    bcaa: 0,
-    gainer: 0,
-    protein: 0,
-    smartVater: 0,
+    // bcaa: 0,
+    // gainer: 0,
+    // protein: 0,
+    // smartVater: 0,
+    MegaAminoMix: 0,
+    BCAA_L_glutamine: 0,
   },
   loading: false,
 };

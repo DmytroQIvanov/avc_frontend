@@ -7,7 +7,7 @@ import {
 } from "../../../store/Slices/productSlice";
 
 export const InputsComponent = (props) => {
-  const { point } = props;
+  const { point, array } = props;
   const dispatch = useDispatch();
   let [countOfInputs, setCountOfInputs] = useState(1);
   let arrayOfInputs = [];

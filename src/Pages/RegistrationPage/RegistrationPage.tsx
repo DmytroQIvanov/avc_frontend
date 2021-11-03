@@ -8,6 +8,7 @@ import "../../assets/design/inputs-buttons.sass";
 const RegistrationPage = () => {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -18,10 +19,13 @@ const RegistrationPage = () => {
   const onHandleData = (elem: any) => {
     setData({ ...data, [elem.target.name]: elem.target.value });
   };
+  if (message) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div className="registration-page">
       <h3>{message}</h3>
-      {errorMessage}
+      <h3>{errorMessage}</h3>
       <div>
         <h4>Имя*</h4>
         <input
@@ -98,6 +102,8 @@ const RegistrationPage = () => {
             } else if (data.password !== data.confirmPassword) {
               setErrorMessage("Пароли не совпадают");
               return;
+            } else if (data.number.length <= 6) {
+              setErrorMessage("Введите валидный номер");
             }
             setMessage("");
             setErrorMessage("");
@@ -112,11 +118,10 @@ const RegistrationPage = () => {
                 if (elem.status == 201) {
                   setMessage("Аккаунт был создан");
                 }
-                return <Redirect to="/login" />;
               })
               .catch((elem) => {
-                console.log(elem.response.data.message);
-                setErrorMessage(elem.response.data.message);
+                console.log(elem?.response?.data?.message);
+                setErrorMessage(elem?.response?.data?.message);
               });
           }}
           className={"yellow-button"}

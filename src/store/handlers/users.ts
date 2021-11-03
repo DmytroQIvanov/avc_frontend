@@ -2,6 +2,11 @@ import { IUser } from "./../../Interfaces/IUser";
 import { call, put } from "redux-saga/effects";
 import { request } from "../requests/adminLogin";
 import { getUsersError, getUsersSuccess } from "../Slices/usersSlice";
+import {
+  addProductToFavouriteError,
+  addProductToFavouriteStart,
+  addProductToFavouriteSuccess,
+} from "../Slices/userSlice";
 
 export function* handleUsers(data: any) {
   try {
@@ -15,6 +20,24 @@ export function* handleUsers(data: any) {
     yield put(getUsersSuccess(response));
   } catch (error) {
     yield put(getUsersError(error));
+
+    console.log(error);
+  }
+}
+
+export function* handleAddProductToFavourite(data: any) {
+  try {
+    console.log(data.payload.data);
+    yield put(addProductToFavouriteSuccess(data.payload.data.product));
+
+    yield call(
+      request,
+      data.payload.url,
+      data.payload.method,
+      data.payload.data.productId
+    );
+  } catch (error) {
+    yield put(addProductToFavouriteError(error));
 
     console.log(error);
   }

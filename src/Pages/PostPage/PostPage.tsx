@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPostsStart, getPostStart } from "../../store/Slices/postSlice";
 import { RootState } from "../../store/store";
+import "./PostPage.sass";
 
 const PostPage = () => {
   const post = useSelector((state: RootState) => state.posts.post);
@@ -13,9 +14,9 @@ const PostPage = () => {
   }, []);
   return (
     <div>
-      <div>
+      <div className={"post-page"}>
         <h1>{post?.name}</h1>
-        <h4>{post?.content}</h4>
+        <h4 className={"post-page__description"}>{post?.content}</h4>
       </div>
     </div>
   );

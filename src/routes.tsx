@@ -6,6 +6,8 @@ import { Header } from "./Components/Header/Header";
 import { NavBar } from "./Components/NavBar/NavBar";
 import { MainPage } from "./Pages/MainPage/MainPage";
 import { SubNavBar } from "./Components/SubNavBar/SubNavBar";
+import NotificationPage from "./Pages/NotificationPage/NotificationPage";
+import FavouritePage from "./Pages/FavouritePage/FavouritePage";
 
 //Lazy Loading
 const LoginPage = lazy(() => import("./Pages/LoginPage/LoginPage"));
@@ -16,9 +18,6 @@ const OrderPage = lazy(() => import("./Pages/OrderPage/OrderPage"));
 const ProductsPage = lazy(() => import("./Pages/ProductsPage/ProductsPage"));
 const PostsPage = lazy(() => import("./Pages/PostsPage/PostsPage"));
 const PostPage = lazy(() => import("./Pages/PostPage/PostPage"));
-const MobileControlBar = lazy(
-  () => import("./Components/MobileControlBar/MobileControlBar")
-);
 const RegistrationPage = lazy(
   () => import("./Pages/RegistrationPage/RegistrationPage")
 );
@@ -51,11 +50,31 @@ const routes = [
     main: () => <OrderPage />,
   },
   {
+    path: "/favourite",
+    exact: true,
+    navbar: () => (
+      <>
+        <Header />
+      </>
+    ),
+    main: () => <FavouritePage />,
+  },
+  {
+    path: "/notifications",
+    exact: true,
+    navbar: () => (
+      <>
+        <Header />
+      </>
+    ),
+    main: () => <NotificationPage />,
+  },
+  {
     path: "/",
     exact: true,
     navbar: () => (
       <>
-        {/*<Header />*/}
+        <Header />
         <NavBar />
       </>
     ),

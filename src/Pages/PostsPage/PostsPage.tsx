@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getPostsStart } from "../../store/Slices/postSlice";
 import { RootState } from "../../store/store";
 import { Loader } from "../../Components/Loader/Loader";
+import "./PostsPage.sass";
 
 const PostsPage = () => {
   const posts = useSelector((state: RootState) => state.posts.posts);
@@ -14,14 +15,14 @@ const PostsPage = () => {
     dispatch(getPostsStart({ url: "/post" }));
   }, []);
   return (
-    <div>
+    <div className={"posts-page"}>
       {loading && <Loader />}
       {posts.map((elem) => (
         <div>
           <Link to={`/post/${elem.id}`}>
-            <h2>{elem.name}</h2>
+            <h2 className={"posts-page__title"}>{elem.name}</h2>
           </Link>
-          <h4>{elem.content}</h4>
+          {/*<h4>{elem.content}</h4>*/}
         </div>
       ))}
     </div>

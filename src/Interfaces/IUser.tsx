@@ -13,16 +13,23 @@ export interface IUser {
     createDateTime: string;
   }[];
   orders: IOrder[];
+  favourite: IProduct[];
 }
 export interface IOrder {
+  id: string;
   orderedAt: any;
   status: string;
   orderProducts: IOrderProduct[];
   orderNotes: string;
+  deliveryAddress: string;
+  user: IUser;
+  PaymentMethod: string;
 }
 
 interface IOrderProduct {
   product: IProduct;
   quantity: number;
-  ID: string;
+  taste: number;
+  weight: number;
+  // ID: string;
 }

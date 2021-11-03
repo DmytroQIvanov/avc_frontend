@@ -14,22 +14,50 @@
         top: 40%
 
     .product
-        width: 180px
-        height: 260px
+        display: flex
+        flex-direction: column
+        width: 200px
+        height: 320px
         box-shadow: 5px 5px 5px 5px rgba(29, 29, 29, 0.56)
         border-radius: 16px
         background-color: #B5B3A8
+
         margin: 10px
         overflow: hidden
         position: relative
         transition-duration: .3s
         transform: scale(0,0)
-        word-break: break-all
+        color: black
         @media only screen and (max-width: 768px)
             width: 40vw
-            height: 200px
+            height: 35vh
             font-size: 0.8em
-        // margin: auto
+
+        .product__title
+            min-height: 20%
+            margin: auto
+            text-overflow: ellipsis
+            text-align: center
+            word-wrap: break-word
+            padding: 5px
+            font-weight: 600
+            font-size: 16px
+            hyphens: auto
+            white-space: wrap
+            //white-space: normal !important
+            word-break: break-word
+
+            @media only screen and (max-width: 768px)
+                font-size: 13px
+                margin: auto
+                //word-break: break-all
+
+            a
+                text-decoration: none
+                color: black
+                //word-break: break-all
+
+
 
 
 
@@ -37,8 +65,13 @@
             color: black
             margin: 10px
             margin-top: 5px
+            text-overflow: ellipsis
+            width: 100%
+            height: 20%
+            white-space: wrap
+            overflow:hidden
+
         .product__bottom-panel
-            position: absolute
             bottom: 0px
             display: flex
             width: 100%
@@ -48,7 +81,7 @@
                 position: absolute
                 bottom: 7px
                 right: 10px
-                width: 35px
+                height: 30px
                 padding: 5px
                 border-radius: 8px
                 background-color: #3333
@@ -69,25 +102,29 @@
                 left: 10px
                 color: black
                 font-size: 26px
+                font-weight: 600
                 @media only screen and (max-width: 768px)
                     font-size: 18px
 
 
         .product__image-container
-            height:50%
+            height:60%
             position: relative
             overflow: hidden
-            // background-color: black
-
-            .product__title
+            @media only screen and (max-width: 768px)
+                height:70%
+            .product__heart_inactive
                 position: absolute
-                text-align: center
-                width: 100%
-                top:65%
-                text-decoration: none
-                color: white
-            img
+                top:4px
+                right: 4px
+                width: 36px
+                object-fit: cover
+                height: fit-content
+                //height: 36px
+                cursor: pointer
 
+
+            img
                 width: 100%
                 height: 100%
                 object-fit: cover
@@ -97,7 +134,7 @@
     .product-row
         width: 65vw
         height: 170px
-        border-radius: 16px
+        border-radius: 14px
         background-color: #B5B3A8
         margin: 10px
         overflow: hidden
@@ -109,29 +146,40 @@
         display: flex
 
 
+
         @media only screen and (max-width: 768px)
             width: 90vw
-            height: 100px
+            height: 120px
             font-size: 0.8em
         .product-row__text-container
             min-width: 55%
             max-width: 55%
+            margin: auto
+
             .product-row__title
-                margin-left: 10px
                 color: black
                 text-decoration: none
                 cursor: pointer
                 font-weight: 700
+                margin: auto
+                display: block
+                @media only screen and (max-width: 768px)
+                    margin: 0px
+                a
+                    text-align: center
 
             .product-row__description
                 color: black
                 margin: 10px
                 margin-top: 5px
                 word-break: break-word
+                white-space: pre-wrap
+                margin: auto
+
         .product-row__side-panel
-            position: absolute
+            position: relative
             display: block
-            width: 22%
+            width: 18%
             height: 100%
             background-color: #D7D3BF
             //border: 3px solid black
@@ -157,26 +205,26 @@
 
 
             .product-row__price
-                position: absolute
-                top:10px
-                left: 14px
+                text-align: center
+                margin-top: 10px
+                display: block
                 color: black
-                font-size: 26px
+                font-size: 24px
+                font-weight: 600
                 @media only screen and (max-width: 768px)
                     font-size: 16px
 
 
         .product-row__image-container
             min-width: 190px
-            max-width: 190px
+            max-width: 130px
             height: 100%
             position: relative
             overflow: hidden
             @media only screen and (max-width: 768px)
-                min-width: 120px
-                max-width: 120px
+                min-width: 70px
+                max-width: 70px
             img
-
                 width: 100%
                 height: 100%
                 object-fit: cover

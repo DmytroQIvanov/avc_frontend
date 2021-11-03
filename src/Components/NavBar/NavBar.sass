@@ -9,21 +9,20 @@
     background: rgba(41, 41, 41, 0.5)
     position: fixed
     top: 50px
-    z-index: 0
+    z-index: 1
 
-    -webkit-user-select: none
-
-
-    @media only screen and (max-width: 600px) 
+    @media only screen and (max-width: 600px)
         height: 55px
 
     .nav-bar__container
         display: flex
+        position: relative
         margin-left: 80px
         margin-right: 80px
         margin-top: 4px
+        z-index: 1
 
-        @media only screen and (max-width: 600px) 
+        @media only screen and (max-width: 600px)
             margin-left: 0px
             margin-right: 0px
             width: 100vw

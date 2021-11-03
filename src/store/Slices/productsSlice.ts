@@ -20,10 +20,12 @@ const initialState: ProductsState = {
   types: [],
   quantity: 20,
   sidebar: {
-    bcaa: 0,
-    gainer: 0,
-    protein: 0,
-    smartVater: 0,
+    MegaAminoMix: 0,
+    BCAA_L_glutamine: 0,
+    // bcaa: 0,ss
+    // gainer: 0,
+    // protein: 0,
+    // smartVater: 0,
   },
 };
 
@@ -36,7 +38,9 @@ export const productsSlice = createSlice({
     },
 
     getProductsSuccess(state, action) {
+      console.log(action);
       state.products = action.payload.products;
+      console.log(state.products);
       state.loading = false;
     },
     getProductsError(state, action) {

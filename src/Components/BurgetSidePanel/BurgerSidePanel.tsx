@@ -7,6 +7,9 @@ import { userLoginStart } from "../../store/Slices/userSlice";
 import { useTranslation } from "react-i18next";
 import { mobileburgerSidePanel } from "../../store/Slices/modalSlice";
 import basket from "../../assets/header-backet.svg";
+import bell from "../Header/assets/bell.svg";
+import userIMG from "../Header/assets/user.svg";
+import loginIMG from "../../assets/login.png";
 
 const BurgerSidePanel = (props: any) => {
   const burgerSidePanel = useSelector(
@@ -35,7 +38,35 @@ const BurgerSidePanel = (props: any) => {
       >
         {!user ? (
           <>
-            <Link to={"/login"} className={"burger-side-panel__login"}>
+            <Link to={"/login"} style={{ display: "flex", lineHeight: "22px" }}>
+              <img
+                src={userIMG}
+                style={{ margin: "auto", marginRight: "10px", width: "24px" }}
+              />
+              Гість
+            </Link>
+            <Link
+              to={"/basket"}
+              className={"burger-side-panel__basket"}
+              style={{ display: "flex" }}
+            >
+              <img
+                src={basket}
+                style={{ margin: "auto", marginRight: "10px", width: "22px" }}
+              />
+              <span style={{ margin: "auto" }}>
+                {t("mobile-side-bar.basket")}
+              </span>
+            </Link>
+            <Link
+              to={"/login"}
+              className={"burger-side-panel__login"}
+              style={{ display: "flex" }}
+            >
+              <img
+                src={loginIMG}
+                style={{ margin: "auto", marginRight: "10px", width: "26px" }}
+              />
               {t("login.log-in")}
             </Link>
             <Link
@@ -63,6 +94,18 @@ const BurgerSidePanel = (props: any) => {
               <span style={{ margin: "auto" }}>
                 {t("mobile-side-bar.basket")}
               </span>
+            </Link>
+
+            <Link
+              to={"/notifications"}
+              className={"burger-side-panel__basket"}
+              style={{ display: "flex" }}
+            >
+              <img
+                src={bell}
+                style={{ margin: "auto", marginRight: "10px", width: "22px" }}
+              />
+              <span style={{ margin: "auto" }}>Повідомлення</span>
             </Link>
             <Link
               to={"/logout"}

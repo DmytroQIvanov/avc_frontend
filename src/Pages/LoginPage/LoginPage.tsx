@@ -10,6 +10,9 @@ import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const user = useSelector((state: RootState) => state.user.user);
+  const errorMessage = useSelector(
+    (state: RootState) => state.user.errorMessage
+  );
   const loading = useSelector((state: RootState) => state.user.loading);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +24,7 @@ const LoginPage = () => {
     <div className="login-page">
       {loading && <Loader />}
       <div>
+        {/*<h4>{errorMessage}</h4>*/}
         <div>
           <p>{t("login.number")}</p>
           <input

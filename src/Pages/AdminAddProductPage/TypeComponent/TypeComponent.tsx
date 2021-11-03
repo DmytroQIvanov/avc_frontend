@@ -1,91 +1,66 @@
 import { useState } from "react";
 import { InputsComponent } from "./InputsComponent";
-import { useDispatch } from "react-redux";
-import { setProductType } from "../../../store/Slices/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addImage,
+  addProductVariant,
+  onHandleTaste,
+  setProductType,
+} from "../../../store/Slices/productSlice";
+import { RootState } from "../../../store/store";
 
 export const TypeComponent = () => {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
-
-  const [currentType, setCurrentType] = useState<{
-    id: null | number;
-    name: null | string;
-  }>({ id: null, name: null });
-
-  const [typesRout, setTypesRout] = useState([
-    {
-      name: "protein",
-      additionalFields: [
-        { array: true, name: "weight" },
-        { array: true, name: "taste" },
-      ],
-    },
-    {
-      name: "bcaa",
-      additionalFields: [
-        { array: true, name: "weight" },
-        // { array: true, name: "taste" },
-      ],
-    },
-    {
-      name: "smartVater",
-      additionalFields: [
-        { array: true, name: "weight" },
-        { array: true, name: "taste" },
-      ],
-    },
-    {
-      name: "gainer",
-      additionalFields: [
-        // { array: true, name: "weight" },
-        { array: true, name: "taste" },
-      ],
-    },
-  ]);
+  const productType = useSelector(
+    (state: RootState) => state.product.productType
+  );
+  // const [currentType, setCurrentType] = useState<{
+  //   id: null | number;
+  //   name: null | string;
+  // }>({ id: null, name: null });
+  const types = [
+    { name: "BCAA_L_glutamine" },
+    { name: "L-Carnitin" },
+    { name: "Mega Amino mix" },
+    { name: "Fat Burner" },
+    { name: "Collagen" },
+    { name: "Mg+B" },
+    { name: "SmartVitamin" },
+  ];
 
   return (
     <div>
-      {currentType.name ? (
-        <div>Selected: {currentType.name}</div>
-      ) : (
-        <div>Not choosen </div>
-      )}
-      <button
-        onClick={() => setActive(!active)}
-        className={"grey-button"}
-        style={{ cursor: "pointer" }}
-      >
-        Choose
-      </button>
-      {active &&
-        typesRout.map((elem, id) => (
-          <div
-            onClick={() => {
-              setCurrentType({ id, name: elem.name });
-              dispatch(setProductType(elem.name));
-              setActive(false);
-            }}
-            style={{
-              padding: "10px",
-              backgroundColor: "#3339",
-              borderRadius: "10px",
-              marginTop: "10px",
-              cursor: "pointer",
-            }}
-          >
-            {elem.name}
-          </div>
-        ))}
-
-      {currentType.id != null && (
-        <div>
-          {typesRout[currentType.id].additionalFields.map((elem) => (
+      Choosen: {productType}
+      {active ? (
+        <>
+          <div style={{ border: "1px solid black" }}>
             <div>
-              <h2>{elem.name}</h2>
-              <InputsComponent point={elem.name} />
+              <div>Тип</div>
+              <div>
+                {types.map((elem) => (
+                  <div
+                    onClick={() => {
+                      setActive(false);
+                      dispatch(setProductType(elem.name));
+                    }}
+                  >
+                    {elem.name}
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+          <button onClick={() => {}}>Set</button>
+        </>
+      ) : (
+        <button
+          onClick={() => {
+            setActive(true);
+          }}
+        >
+          Choose
+        </button>
       )}
     </div>
   );

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Redirect } from "react-router-dom";
-import { getUsersStart } from "../../store/Slices/usersSlice";
+import {
+  changeOrderQuantity,
+  deleteOrderProduct,
+  userLoginStart,
+} from "../../store/Slices/userSlice";
 
 const OrderPage = () => {
   enum paymentMethodEnum {
@@ -42,15 +46,67 @@ const OrderPage = () => {
       <div>
         {products.map((elem) => (
           <div>
-            <img src={elem.product.imageKey1} />
-            <div>{elem.product.name}</div>
-            <div>{elem.product.description}</div>
-            <div>{elem.product.price}</div>
+            <h3>{elem.product.name}</h3>
+            <h4>
+              <div>Вкус: {elem.product.productVariant[elem.taste].taste}</div>
+              <div>
+                Вес:
+                {
+                  elem.product.productVariant[elem.taste].property[elem.weight]
+                    .weight
+                }
+              </div>
+            </h4>
+            <div>
+              <button
+                className={"quantity-button"}
+                onClick={() => {
+                  dispatch(
+                    changeOrderQuantity({
+                      url: "/user/changeProductQuantity",
+                      method: "PATCH",
+                      data: {
+                        name: elem.product.name,
+                        changedQuantity: 1,
+                        quantity: elem.quantity + 1,
+                      },
+                    })
+                  );
+                }}
+              >
+                +
+              </button>
+              <span>{elem.quantity}</span>
+              <button
+                className={"quantity-button"}
+                onClick={() => {
+                  dispatch(
+                    changeOrderQuantity({
+                      url: "/user/changeProductQuantity",
+                      method: "PATCH",
+                      data: {
+                        name: elem.product.name,
+                        changedQuantity: -1,
+                        quantity: elem.quantity - 1,
+                      },
+                    })
+                  );
+                }}
+              >
+                -
+              </button>
+            </div>
+            {/*<div>{elem.product.price}</div>*/}
           </div>
         ))}
       </div>
       <div>
         <button
+          className={
+            deliveryMethod == deliveryMethodEnum.PICKUP
+              ? "yellow-button"
+              : "grey-button"
+          }
           onClick={() => {
             if (paymentMethod != paymentMethodEnum.COD) {
               setDeliveryMethod(deliveryMethodEnum.PICKUP);
@@ -59,24 +115,39 @@ const OrderPage = () => {
         >
           Самовывоз
         </button>
-        <button onClick={() => setDeliveryMethod(deliveryMethodEnum.POST)}>
+        <button
+          className={
+            deliveryMethod == deliveryMethodEnum.POST
+              ? "yellow-button"
+              : "grey-button"
+          }
+          onClick={() => {
+            setDeliveryMethod(deliveryMethodEnum.POST);
+          }}
+        >
           Новой почтой
         </button>
       </div>
       {deliveryMethod == deliveryMethodEnum.POST ? (
         <div>
           <textarea
+            className={"default-input"}
             placeholder={"Адрес доставки?"}
             value={deliveryAddress}
             onChange={(elem) => setDeliveryAddress(elem.target.value)}
           />
         </div>
       ) : (
-        <>Наш адрес: </>
+        <h4>Наш адрес: провулок Ярослава Хомова, 3, 4 этаж, Київ</h4>
       )}
       <div>
         <h3>Способ оплаты</h3>
         <button
+          className={
+            paymentMethod == paymentMethodEnum.COD
+              ? "yellow-button"
+              : "grey-button"
+          }
           onClick={() => {
             setPaymentMethod(paymentMethodEnum.COD);
             setDeliveryMethod(deliveryMethodEnum.POST);
@@ -84,22 +155,22 @@ const OrderPage = () => {
         >
           Наложенный
         </button>
-        <button onClick={() => setPaymentMethod(paymentMethodEnum.CARD)}>
+        <button
+          className={
+            paymentMethod == paymentMethodEnum.CARD
+              ? "yellow-button"
+              : "grey-button"
+          }
+          onClick={() => setPaymentMethod(paymentMethodEnum.CARD)}
+        >
           Картой
         </button>
-        {deliveryMethod == deliveryMethodEnum.PICKUP && <button>В руки</button>}
-        <h4>
-          {paymentMethod != "NOCHOOSE"
-            ? paymentMethod == "CARD"
-              ? "Оплата картой"
-              : "Наложенным платежём"
-            : " "}
-        </h4>
       </div>
 
       <div>
         <h3>Примечания к заказу</h3>
         <textarea
+          className={"default-input"}
           value={orderNotes}
           onChange={(elem) => {
             setOrderNotes(elem.target.value);
@@ -108,13 +179,19 @@ const OrderPage = () => {
       </div>
 
       <button
+        className={"yellow-button"}
         onClick={() => {
+          if (deliveryMethod == deliveryMethodEnum.PICKUP) {
+            setDeliveryAddress("Самовывоз");
+          }
+
           dispatch(
-            getUsersStart({
+            userLoginStart({
               url: "/user/order",
               method: "POST",
               data: {
                 orderNotes,
+                deliveryAddress,
               },
             })
           );

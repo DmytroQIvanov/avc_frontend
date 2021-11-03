@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:16
 WORKDIR /avc-frontend
 COPY package.json .
 RUN npm install -g serve

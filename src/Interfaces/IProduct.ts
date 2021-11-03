@@ -1,15 +1,23 @@
+import { IUser } from "./IUser";
+
 export interface IProduct {
   id: number;
   name: string;
   description: string;
-  price: number;
-  imageKey1: string;
-  imageKey2: string;
-  imageKey3: string;
-  imageName: string;
-  url1: string;
-  url2: string;
-  url3: string;
-  arrayOfWeight: [];
-  arrayOfTaste: [];
+  comments: IComment[];
+  type: string;
+  productVariant: {
+    price: number;
+    taste: string;
+    url1: string;
+    property: {
+      weight: string;
+      price: number;
+    }[];
+  }[];
+}
+
+interface IComment {
+  content: string;
+  user: IUser;
 }

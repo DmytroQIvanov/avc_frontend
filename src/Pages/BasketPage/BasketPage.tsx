@@ -2,14 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeOrderQuantity,
   deleteOrderProduct,
-  userLoginStart,
 } from "../../store/Slices/userSlice";
 import { RootState } from "../../store/store";
 import "./BasketPage.sass";
 import { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { handleDeleteOrderProduct } from "../../store/handlers/products";
+import { Link, Redirect } from "react-router-dom";
 
 const BasketPage = () => {
   const products = useSelector((state: RootState) => state.user.user?.basket);
@@ -19,15 +16,17 @@ const BasketPage = () => {
   useEffect(() => {
     let result = 0;
     products?.forEach((elem) => {
-      result += elem.product.price * elem.quantity;
+      result +=
+        elem.product.productVariant[elem.taste].property[elem.weight].price *
+        elem.quantity;
     });
     setTotalPrice(result);
   }, [products]);
+  // }
   if (!user) {
     return <Redirect to={"/login"} />;
   }
-
-  if (user.basket.length == 0) {
+  if (user?.basket.length == 0 || !user) {
     return (
       <div className="basket-page">
         <div className="basket-page__order-container">
@@ -43,10 +42,27 @@ const BasketPage = () => {
     <div className="basket-page">
       <div className="basket-page__order-container">
         {products?.map((elem) => (
-          <div className="backet-page__order" key={elem.ID}>
+          <div className="backet-page__order" key={elem.product.name}>
             <h4 className="order__name">{elem.product.name}</h4>
-            <h4 className="order__name">Price: {elem.product.price}</h4>
-
+            <h6 className="order__name">
+              {elem.product.productVariant[elem.taste].taste}
+            </h6>
+            <h6 className="order__name">
+              {
+                elem.product.productVariant[elem.taste].property[elem.weight]
+                  .weight
+              }
+            </h6>
+            <h4 className="order__name">
+              Цена:{" "}
+              {
+                elem.product.productVariant[elem.taste].property[elem.weight]
+                  .price
+              }{" "}
+              * {elem.quantity} ={" "}
+              {elem.product.productVariant[elem.taste].property[elem.weight]
+                .price * elem.quantity}
+            </h4>
             <button
               className={"basket-page__quantity-button"}
               onClick={() => {
@@ -55,7 +71,7 @@ const BasketPage = () => {
                     url: "/user/changeProductQuantity",
                     method: "PATCH",
                     data: {
-                      orderId: elem.ID,
+                      name: elem.product.name,
                       changedQuantity: 1,
                       quantity: elem.quantity + 1,
                     },
@@ -74,7 +90,7 @@ const BasketPage = () => {
                     url: "/user/changeProductQuantity",
                     method: "PATCH",
                     data: {
-                      orderId: elem.ID,
+                      name: elem.product.name,
                       changedQuantity: -1,
                       quantity: elem.quantity - 1,
                     },
@@ -90,10 +106,10 @@ const BasketPage = () => {
                 onClick={() => {
                   dispatch(
                     deleteOrderProduct({
-                      url: `/user/product/${elem.ID}`,
+                      url: `/user/product`,
                       method: "DELETE",
                       data: {
-                        orderId: elem.ID,
+                        name: elem.product.name,
                       },
                     })
                   );
