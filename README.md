@@ -1,6 +1,6 @@
 Site: https://avc-team.com.ua
 
-Tech stack:
+## Tech stack:
 
-## React
-## Redux
+### React
+### Redux
