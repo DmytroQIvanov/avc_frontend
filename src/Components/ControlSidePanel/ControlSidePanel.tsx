@@ -2,24 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./ControlSidePanel.sass";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { setProductsTypes } from "../../store/Slices/productsSlice";
-import { getSideBarLengthStart } from "../../store/Slices/sideBarSlice";
 import { useTranslation } from "react-i18next";
 import { mobileControlSodePanel } from "../../store/Slices/modalSlice";
+import ControlSidePanelController, {
+  SidePanelEnum,
+} from "./ControlSidePanel.controller";
 
 const ControlSidePanel = (props: any) => {
-  const [input, setInput] = useState({
-    protein: true,
-    gainer: true,
-    bcaa: true,
-    smartVater: true,
-  });
-  const [array, setArray] = useState<string[]>([
-    "protein",
-    "bcaa",
-    "gainer",
-    "smartVater",
-  ]);
   const dispatch = useDispatch();
   const sidebar = useSelector(
     (state: RootState) => state.sidebar.sidebarLength
@@ -27,29 +16,13 @@ const ControlSidePanel = (props: any) => {
   const visibilitySidePanel = useSelector(
     (state: RootState) => state.modal.mobileControlSidePanel
   );
-  useEffect(() => {
-    dispatch(setProductsTypes(array));
-  }, [input]);
 
-  useEffect(() => {
-    dispatch(getSideBarLengthStart({ url: "/product/sidebar" }));
-  }, []);
-
-  const on = (type: "protein" | "bcaa" | "gainer" | "smartVater") => {
-    if (array.indexOf(type) == -1) {
-      setArray([...array, type]);
-    } else {
-      const result = array.map((elem) => {
-        if (elem != type) {
-          return elem;
-        }
-        return "";
-      });
-      setArray(result);
-    }
-    setInput({ ...input, [type]: !input[type] });
-  };
   const { t, i18n } = useTranslation();
+
+  const {
+    states: { input },
+    actions: { changeBarState },
+  } = ControlSidePanelController();
   return (
     <aside>
       <div
@@ -66,59 +39,53 @@ const ControlSidePanel = (props: any) => {
         <ul>
           <h3>Absolute Life (???)</h3>
           <li>
-            BCAA+L-Glutamine (1)
+            BCAA+L-Glutamine ({sidebar.BCAA_L_glutamine})
             <button
               name="protein"
               value="protein"
-              className={`sidebar__input-square ${input.protein && "active"}`}
-              onClick={() => on("protein")}
+              className={`sidebar__input-square ${input.bcaa && "active"}`}
+              onClick={() => changeBarState(SidePanelEnum.bcaa)}
             ></button>
           </li>
 
           <li>
-            L-Carnitin (1)
+            L-Carnitin ({sidebar.L_Carnitin})
             <button
               name="gainer"
-              className={`sidebar__input-square ${input.gainer && "active"}`}
-              onClick={() => on("gainer")}
+              className={`sidebar__input-square ${input.LCarnitin && "active"}`}
+              onClick={() => changeBarState(SidePanelEnum.LCarnitin)}
             ></button>
           </li>
           <li>
-            Mega Amino mix (1)
+            Mega Amino mix ({sidebar.MegaAminoMix})
             <button
               name="bcaa"
-              className={`sidebar__input-square ${input.bcaa && "active"}`}
-              onClick={() => on("bcaa")}
+              className={`sidebar__input-square ${input.aminoMix && "active"}`}
+              onClick={() => changeBarState(SidePanelEnum.aminoMix)}
             ></button>
           </li>
           <li>
-            Fat Burner (1)
+            Fat Burner ({sidebar.Fat_Burner})
             <button
               name="smartVater"
-              className={`sidebar__input-square ${
-                input.smartVater && "active"
-              }`}
-              onClick={() => on("smartVater")}
+              className={`sidebar__input-square ${input.fatBurner && "active"}`}
+              onClick={() => changeBarState(SidePanelEnum.fatBurner)}
             ></button>
           </li>
           <li>
-            Mg+B (1)
+            Mg+B ({sidebar.Mg_B})
             <button
               name="smartVater"
-              className={`sidebar__input-square ${
-                input.smartVater && "active"
-              }`}
-              onClick={() => on("smartVater")}
+              className={`sidebar__input-square ${input.mgB && "active"}`}
+              onClick={() => changeBarState(SidePanelEnum.mgB)}
             ></button>
           </li>
           <li>
-            Collagen (1)
+            Collagen ({sidebar.Collagen})
             <button
               name="smartVater"
-              className={`sidebar__input-square ${
-                input.smartVater && "active"
-              }`}
-              onClick={() => on("smartVater")}
+              className={`sidebar__input-square ${input.collagen && "active"}`}
+              onClick={() => changeBarState(SidePanelEnum.collagen)}
             ></button>
           </li>
         </ul>

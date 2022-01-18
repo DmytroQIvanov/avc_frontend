@@ -8,8 +8,8 @@ export interface ProductsState {
   loading: boolean;
   key: string;
   quantity: number;
-  types: [string] | [];
-  sidebar: IProductLength;
+  types: string[];
+  // sidebar: IProductLength;
 }
 
 const initialState: ProductsState = {
@@ -19,14 +19,14 @@ const initialState: ProductsState = {
   key: "",
   types: [],
   quantity: 20,
-  sidebar: {
-    MegaAminoMix: 0,
-    BCAA_L_glutamine: 0,
-    // bcaa: 0,ss
-    // gainer: 0,
-    // protein: 0,
-    // smartVater: 0,
-  },
+  // sidebar: {
+  //   MegaAminoMix: 0,
+  //   BCAA_L_glutamine: 0,
+  // bcaa: 0,ss
+  // gainer: 0,
+  // protein: 0,
+  // smartVater: 0,
+  // },
 };
 
 export const productsSlice = createSlice({
@@ -57,9 +57,9 @@ export const productsSlice = createSlice({
     setProductsTypes: (state, data) => {
       state.types = data.payload;
     },
-    setSideBar: (state, data) => {
-      state.sidebar = data.payload;
-    },
+    // setSideBar: (state, data) => {
+    //   state.sidebar = data.payload;
+    // },
   },
 });
 
@@ -70,7 +70,7 @@ export const {
   getProductsError,
   setProductsKey,
   setProductsTypes,
-  setSideBar,
+  // setSideBar,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

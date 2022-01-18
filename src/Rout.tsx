@@ -31,7 +31,7 @@ const Rout = () => {
     <Suspense fallback={<LoadingPage />}>
       <Router>
         <MobileSearch />
-        <ControlSidePanel />
+        {/*<ControlSidePanel />*/}
         <BurgerSidePanel />
         <Switch>
           {routes.map((route, index) => (

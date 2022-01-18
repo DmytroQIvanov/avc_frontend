@@ -1,40 +1,30 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../Components/Loader/Loader";
-import { SideBar } from "../../Components/SideBar/SideBar";
 import { getProductsStart } from "../../store/Slices/productsSlice";
 import { RootState } from "../../store/store";
 import { Product } from "./Product/Product";
 import "./ProductsPage.sass";
 import MobileControlBar from "../../Components/MobileControlBar/MobileControlBar";
 import { useTranslation } from "react-i18next";
+import ControlSidePanel from "../../Components/ControlSidePanel/ControlSidePanel";
+import ProductsPageController from "./ProductsPage.controller";
 
 const ProductsPage = (props: any) => {
+  const {} = ProductsPageController();
   const products = useSelector((state: RootState) => state.products.products);
-  const key = useSelector((state: RootState) => state.products.key);
   const loading = useSelector((state: RootState) => state.products.loading);
-  const types = useSelector((state: RootState) => state.products.types);
-  const dispatch = useDispatch();
+
   const { t, i18n } = useTranslation();
   const { admin } = props;
-
-  useEffect(() => {
-    dispatch(
-      getProductsStart({
-        url: "/product",
-        key,
-        data: { types },
-        method: "POST",
-      })
-    );
-  }, [key, types]);
 
   return (
     <>
       <div className="products-page">
         {loading && <Loader />}
         <MobileControlBar />
-        <SideBar />
+        {/*<SideBar />*/}
+        <ControlSidePanel />
 
         <div className="products-page__container">
           {products?.map((elem) => (
