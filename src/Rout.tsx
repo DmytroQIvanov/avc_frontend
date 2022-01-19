@@ -6,10 +6,8 @@ import { LoadingPage } from "./Pages/LoadingPage/LoadingPage";
 import routes from "./routes";
 import { userLoginStart } from "./store/Slices/userSlice";
 import { RootState } from "./store/store";
-import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
 import MobileSearch from "./Components/MobileSearch/MobileSearch";
-import ControlSidePanel from "./Components/ControlSidePanel/ControlSidePanel";
 import BurgerSidePanel from "./Components/BurgetSidePanel/BurgerSidePanel";
 
 const Rout = () => {

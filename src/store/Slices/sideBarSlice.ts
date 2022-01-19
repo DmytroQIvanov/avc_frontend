@@ -27,7 +27,7 @@ export const sideBarSlice = createSlice({
     },
 
     getSideBarLengthSuccess(state, data) {
-      state.sidebarLength = data.payload;
+      state.sidebarLength = { ...state.sidebarLength, ...data.payload };
       state.loading = false;
     },
     getSideBarLengthError(state, data) {

@@ -67,18 +67,21 @@
             @media (max-width: 767px)
                 display: none
             img
-                width: 25px
+                width: 24px
                 position: absolute
-                top: 7px
+                top: 4px
                 right: 10px
                 cursor: pointer
+                transition-duration: .2s
                 @media (max-width: 767px)
                     display: block
+                &:hover
+                    transform: rotate(-50deg)
             input
                 padding: 5px
                 border-radius: 8px
                 border: none
-                font-size: 22px
+                font-size: 20px
                 display: flex
 
         .header__mobile-search
@@ -129,6 +132,7 @@
                 height: 100%
                 display: flex
                 margin-left: 15px
+                position: relative
                 img
                     margin: auto
                     height: 70%
@@ -179,20 +183,18 @@
                 img
                    margin: auto
                    height: 70%
-                .header__basket-count
-                    position: absolute
-                    bottom: 0px
-                    right: -5px
-                    font-size: 20px
-                    border-radius: 100%
-                    background-color: white
-                    width: 23px
-                    height: 23px
-                    color: black
-                    text-align: center
-                    line-height: 22px
-                
-
+            .header__element-count
+                position: absolute
+                bottom: 0px
+                right: -5px
+                font-size: 20px
+                border-radius: 100%
+                background-color: white
+                width: 23px
+                height: 23px
+                color: black
+                text-align: center
+                line-height: 22px
 
 
 

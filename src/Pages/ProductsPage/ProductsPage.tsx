@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../Components/Loader/Loader";
-import { getProductsStart } from "../../store/Slices/productsSlice";
 import { RootState } from "../../store/store";
 import { Product } from "./Product/Product";
 import "./ProductsPage.sass";

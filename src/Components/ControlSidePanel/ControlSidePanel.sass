@@ -1,8 +1,13 @@
-
+@keyframes listVisibility
+  from
+    height: 0px
+  to
+    height: 210px
 
 @media only screen and (min-width: 600px)
   .control-side-panel
     width: 330px
+    padding: 5px
     min-height: 600px
     height: fit-content
     background: #202020
@@ -14,17 +19,44 @@
     margin-top: 10px
     position: relative
     @media only screen and (max-width: 768px)
-      // width: 0%
       display: none
     ul
       padding-left: 15px
+      transition-duration: 3s
+      h3
+        transition-duration: .5s
+        &:hover
+          color: #c5b635
+        &:after
+          content: url('../../assets/arrow.svg')
+          position: absolute
+          right: 5px
+          cursor: pointer
+          transition-duration: .3s
 
+
+      div
+        height: 0px
+        opacity: 10%
+        overflow: hidden
+        transition-duration: 3s
+      &:hover
+        div
+          transition-duration: 3s
+          height: max-content
+          animation: listVisibility 1s
+          opacity: 100%
+          overflow: hidden
+        li
+          line-height: 25px
+          padding: 5px 5px 5px 2px
+          display: flex
 
     li
-      display: flex
-      line-height: 25px
-      padding: 5px
-      padding-left: 2px
+      list-style: none
+      position: relative
+      transition-duration: .3s
+
       .sidebar__input-square
         position: absolute
         right: 20px

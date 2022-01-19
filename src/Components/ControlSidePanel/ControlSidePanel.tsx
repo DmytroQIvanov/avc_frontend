@@ -37,57 +37,76 @@ const ControlSidePanel = (props: any) => {
         } control-side-panel `}
       >
         <ul>
-          <h3>Absolute Life (???)</h3>
-          <li>
-            BCAA+L-Glutamine ({sidebar.BCAA_L_glutamine})
-            <button
-              name="protein"
-              value="protein"
-              className={`sidebar__input-square ${input.bcaa && "active"}`}
-              onClick={() => changeBarState(SidePanelEnum.bcaa)}
-            ></button>
-          </li>
+          <h3>
+            Absolute Life (
+            {sidebar.MegaAminoMix +
+              sidebar.BCAA_L_glutamine +
+              sidebar.Collagen +
+              sidebar.Mg_B +
+              sidebar.L_Carnitin +
+              sidebar.Fat_Burner}
+            )
+          </h3>
+          <div>
+            <li>
+              BCAA+L-Glutamine ({sidebar.BCAA_L_glutamine})
+              <button
+                name="protein"
+                value="protein"
+                className={`sidebar__input-square ${input.bcaa && "active"}`}
+                onClick={() => changeBarState(SidePanelEnum.bcaa)}
+              ></button>
+            </li>
 
-          <li>
-            L-Carnitin ({sidebar.L_Carnitin})
-            <button
-              name="gainer"
-              className={`sidebar__input-square ${input.LCarnitin && "active"}`}
-              onClick={() => changeBarState(SidePanelEnum.LCarnitin)}
-            ></button>
-          </li>
-          <li>
-            Mega Amino mix ({sidebar.MegaAminoMix})
-            <button
-              name="bcaa"
-              className={`sidebar__input-square ${input.aminoMix && "active"}`}
-              onClick={() => changeBarState(SidePanelEnum.aminoMix)}
-            ></button>
-          </li>
-          <li>
-            Fat Burner ({sidebar.Fat_Burner})
-            <button
-              name="smartVater"
-              className={`sidebar__input-square ${input.fatBurner && "active"}`}
-              onClick={() => changeBarState(SidePanelEnum.fatBurner)}
-            ></button>
-          </li>
-          <li>
-            Mg+B ({sidebar.Mg_B})
-            <button
-              name="smartVater"
-              className={`sidebar__input-square ${input.mgB && "active"}`}
-              onClick={() => changeBarState(SidePanelEnum.mgB)}
-            ></button>
-          </li>
-          <li>
-            Collagen ({sidebar.Collagen})
-            <button
-              name="smartVater"
-              className={`sidebar__input-square ${input.collagen && "active"}`}
-              onClick={() => changeBarState(SidePanelEnum.collagen)}
-            ></button>
-          </li>
+            <li>
+              L-Carnitin ({sidebar.L_Carnitin})
+              <button
+                name="gainer"
+                className={`sidebar__input-square ${
+                  input.LCarnitin && "active"
+                }`}
+                onClick={() => changeBarState(SidePanelEnum.LCarnitin)}
+              ></button>
+            </li>
+            <li>
+              Mega Amino mix ({sidebar.MegaAminoMix})
+              <button
+                name="bcaa"
+                className={`sidebar__input-square ${
+                  input.aminoMix && "active"
+                }`}
+                onClick={() => changeBarState(SidePanelEnum.aminoMix)}
+              ></button>
+            </li>
+            <li>
+              Fat Burner ({sidebar.Fat_Burner})
+              <button
+                name="smartVater"
+                className={`sidebar__input-square ${
+                  input.fatBurner && "active"
+                }`}
+                onClick={() => changeBarState(SidePanelEnum.fatBurner)}
+              ></button>
+            </li>
+            <li>
+              Mg+B ({sidebar.Mg_B})
+              <button
+                name="smartVater"
+                className={`sidebar__input-square ${input.mgB && "active"}`}
+                onClick={() => changeBarState(SidePanelEnum.mgB)}
+              ></button>
+            </li>
+            <li>
+              Collagen ({sidebar.Collagen})
+              <button
+                name="smartVater"
+                className={`sidebar__input-square ${
+                  input.collagen && "active"
+                }`}
+                onClick={() => changeBarState(SidePanelEnum.collagen)}
+              ></button>
+            </li>
+          </div>
         </ul>
         <ul>
           <h3>{t("nav-bar.equipment")}</h3>

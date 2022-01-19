@@ -8,7 +8,7 @@ export const BottomPanel = () => {
     <footer className="bottom-panel">
       <div className="bottom-panel__container">
         <img src={logo} className="bottom-panel__logo" />
-        <div className="bottom-panel__copyrigth">
+        <div className="bottom-panel__copyright">
           Copyright © 2021 All rights reserved.
         </div>
         <div className="bottom-panel__social-networks">

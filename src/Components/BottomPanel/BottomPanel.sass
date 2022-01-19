@@ -1,11 +1,11 @@
 .bottom-panel
     width: 100vw
-    height: 140px
+    height: 80px
     background-color: #292929
     margin-top: 40px
     @media only screen and (max-width: 768px)
         position: static
-        bottom:0px
+        bottom: 0px
         height: 70px
 
 
@@ -23,12 +23,12 @@
              
         
         .bottom-panel__logo
-            // width: 160px
+            width: 160px
             margin: auto
             @media only screen and (max-width: 768px)
-                width: 120px
+                width: 100px
 
-        .bottom-panel__copyrigth
+        .bottom-panel__copyright
             margin: auto
             @media only screen and (max-width: 768px)
                 font-size: 0.8em
@@ -36,7 +36,7 @@
         .bottom-panel__social-networks
             display: flex 
             margin: auto
-            img 
-                margin: auto
-                margin-left: 10px
-                width: 60%
+            width: fit-content
+
+            img
+                width: 50%

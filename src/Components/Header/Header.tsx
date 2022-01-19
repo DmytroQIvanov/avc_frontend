@@ -87,7 +87,7 @@ export const Header = () => {
             <Link to="/basket" className="header__basket-container">
               <img src={backet} />
               {user && (
-                <span className="header__basket-count">{basket?.length}</span>
+                <span className="header__element-count">{basket?.length}</span>
               )}
             </Link>
             <Link
@@ -95,6 +95,11 @@ export const Header = () => {
               className={"header__favourites-container header__icon"}
             >
               <img src={heart} />
+              {user && user.favourite.length >= 1 && (
+                <span className="header__element-count">
+                  {user.favourite.length}
+                </span>
+              )}
             </Link>
 
             <div className="header__basket-container">

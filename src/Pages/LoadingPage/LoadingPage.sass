@@ -1,12 +1,25 @@
+@keyframes imageRotating
+    0%
+        transform: rotate(0deg)
+    40%
+        transform: rotate(360deg)
+    100%
+        transform: rotate(720deg)
+
+
+
+
 .loading-page
     background-color: #3333
     width: 100%
     height: 100vh
     position: relative
     display: flex
+    transition-duration: .1s
 
     .loading-page__img
         margin: auto
+        animation: imageRotating 4s
         //transition-duration: .3s
 
 
