@@ -6,6 +6,9 @@ import { RootState } from "../../store/store";
 const ProductsPageController = () => {
   const dispatch = useDispatch();
 
+  const products = useSelector((state: RootState) => state.products.products);
+  const loading = useSelector((state: RootState) => state.products.loading);
+
   const key = useSelector((state: RootState) => state.products.key);
   const types = useSelector((state: RootState) => state.products.types);
 
@@ -19,7 +22,7 @@ const ProductsPageController = () => {
       })
     );
   }, [key, types]);
-  return { states: {}, actions: {} };
+  return { states: { products, loading }, actions: {} };
 };
 
 export default ProductsPageController;

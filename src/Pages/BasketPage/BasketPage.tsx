@@ -1,28 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import {
-  changeOrderQuantity,
-  deleteOrderProduct,
-} from "../../store/Slices/userSlice";
-import { RootState } from "../../store/store";
 import "./BasketPage.sass";
-import { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+import BasketPageController from "./BasketPage.controller";
 
 const BasketPage = () => {
-  const products = useSelector((state: RootState) => state.user.user?.basket);
-  const user = useSelector((state: RootState) => state.user.user);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    let result = 0;
-    products?.forEach((elem) => {
-      result +=
-        elem.product.productVariant[elem.taste].property[elem.weight].price *
-        elem.quantity;
-    });
-    setTotalPrice(result);
-  }, [products]);
-  // }
+  const {
+    actions: {
+      reduceProductQuantity,
+      increaseProductQuantity,
+      deleteProductQuantity,
+    },
+    states: { totalPrice, products, user },
+  } = BasketPageController();
   if (!user) {
     return <Redirect to={"/login"} />;
   }
@@ -66,17 +54,7 @@ const BasketPage = () => {
             <button
               className={"basket-page__quantity-button"}
               onClick={() => {
-                dispatch(
-                  changeOrderQuantity({
-                    url: "/user/changeProductQuantity",
-                    method: "PATCH",
-                    data: {
-                      name: elem.product.name,
-                      changedQuantity: 1,
-                      quantity: elem.quantity + 1,
-                    },
-                  })
-                );
+                increaseProductQuantity(elem);
               }}
             >
               +
@@ -85,17 +63,7 @@ const BasketPage = () => {
             <button
               className={"basket-page__quantity-button"}
               onClick={() => {
-                dispatch(
-                  changeOrderQuantity({
-                    url: "/user/changeProductQuantity",
-                    method: "PATCH",
-                    data: {
-                      name: elem.product.name,
-                      changedQuantity: -1,
-                      quantity: elem.quantity - 1,
-                    },
-                  })
-                );
+                reduceProductQuantity(elem);
               }}
             >
               -
@@ -104,15 +72,7 @@ const BasketPage = () => {
               <button
                 className={"basket-page__delete-button"}
                 onClick={() => {
-                  dispatch(
-                    deleteOrderProduct({
-                      url: `/user/product`,
-                      method: "DELETE",
-                      data: {
-                        name: elem.product.name,
-                      },
-                    })
-                  );
+                  deleteProductQuantity(elem);
                 }}
               >
                 X

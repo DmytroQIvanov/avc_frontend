@@ -26,7 +26,7 @@ export interface IOrder {
   PaymentMethod: string;
 }
 
-interface IOrderProduct {
+export interface IOrderProduct {
   product: IProduct;
   quantity: number;
   taste: number;

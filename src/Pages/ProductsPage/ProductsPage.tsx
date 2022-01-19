@@ -9,9 +9,9 @@ import ControlSidePanel from "../../Components/ControlSidePanel/ControlSidePanel
 import ProductsPageController from "./ProductsPage.controller";
 
 const ProductsPage = (props: any) => {
-  const {} = ProductsPageController();
-  const products = useSelector((state: RootState) => state.products.products);
-  const loading = useSelector((state: RootState) => state.products.loading);
+  const {
+    states: { products, loading },
+  } = ProductsPageController();
 
   const { t, i18n } = useTranslation();
   const { admin } = props;

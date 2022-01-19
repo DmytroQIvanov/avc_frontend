@@ -1,35 +1,32 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useParams, Link } from "react-router-dom";
 import { Loader } from "../../Components/Loader/Loader";
-import {
-  chooseTaste,
-  chooseWeight,
-  getProductStart,
-} from "../../store/Slices/productSlice";
-import { RootState } from "../../store/store";
+import { chooseTaste, chooseWeight } from "../../store/Slices/productSlice";
 import "./ProductPage.sass";
 import { Helmet } from "react-helmet";
-import { addProductToBasketStart } from "../../store/Slices/userSlice";
 import ProductQuantityBar from "../../Components/ProductQuantityBar/ProductQuantityBar";
 import Comments from "./Comments/Comments";
+import ProductPageController from "./ProductPage.controller";
 
 const ProductPage = () => {
+  const {
+    states: {
+      product,
+      tastePanel,
+      weightPanel,
+      quantity,
+      loading,
+      choosenState,
+      id,
+    },
+    actions: {
+      handleWeightPanel,
+      handleTastePanel,
+      setQuantity,
+      addProductToBasket,
+    },
+  } = ProductPageController();
   const dispatch = useDispatch();
-  const params: { id: string } = useParams();
-  const product = useSelector((state: RootState) => state.product.product);
-  const choosenState = useSelector(
-    (state: RootState) => state.product.choosenState
-  );
-  const loading = useSelector((state: RootState) => state.product.loading);
-  const [quantity, setQuantity] = useState(1);
-  const [taste, setTaste] = useState(false);
-  const [weight, setWeight] = useState(false);
-
-  useEffect(() => {
-    dispatch(getProductStart({ url: "/product", id: params.id }));
-  }, []);
 
   return (
     <>
@@ -45,7 +42,7 @@ const ProductPage = () => {
               <h1 className={"product-page__mobile-name"}>{product.name}</h1>
               <img
                 src={product.productVariant[choosenState.taste].url1}
-                key={params.id}
+                key={id}
               />
               <div className="product-page__title-container">
                 <h1 className="product-page__name">{product?.name}</h1>
@@ -59,7 +56,7 @@ const ProductPage = () => {
                       <div>Смак*</div>
                       <span
                         className={"yellow-button"}
-                        onClick={() => setTaste(!taste)}
+                        onClick={handleTastePanel}
                         style={{
                           position: "relative",
                           display: "flex",
@@ -67,7 +64,7 @@ const ProductPage = () => {
                         }}
                       >
                         {product.productVariant[choosenState.taste].taste}
-                        {taste && (
+                        {tastePanel && (
                           <div className={"model-choose-block"}>
                             {product.productVariant.map((elem, index) => (
                               <div
@@ -89,7 +86,7 @@ const ProductPage = () => {
                       <div style={{ margin: "30px" }}>Упаковка (г,мл)*</div>
                       <span
                         className={"yellow-button"}
-                        onClick={() => setWeight(!weight)}
+                        onClick={handleWeightPanel}
                       >
                         {
                           product.productVariant[choosenState.taste].property[
@@ -98,7 +95,7 @@ const ProductPage = () => {
                         }
                       </span>
                       <div>
-                        {weight && (
+                        {weightPanel && (
                           <div>
                             {product.productVariant[
                               choosenState.taste
@@ -147,20 +144,7 @@ const ProductPage = () => {
                 <div className={"product-page__buy-block"}>
                   <button
                     className="product-page__buy-button"
-                    onClick={() => {
-                      dispatch(
-                        addProductToBasketStart({
-                          url: `/user/product/${product.id}`,
-                          method: "POST",
-                          data: {
-                            taste: choosenState.taste,
-                            weight: choosenState.weight,
-                            quantity,
-                            product,
-                          },
-                        })
-                      );
-                    }}
+                    onClick={addProductToBasket}
                   >
                     Додати до кошику
                   </button>
