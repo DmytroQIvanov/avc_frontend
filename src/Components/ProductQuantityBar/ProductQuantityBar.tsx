@@ -7,7 +7,7 @@ const ProductQuantityBar = (props: any) => {
   const dispatch = useDispatch();
   return (
     <div className={"product-quantity-bar"}>
-      <div className={"product-quantity-bar-container"}>
+      <div className={"product-quantity-btn-container"}>
         <button
           className={"product-quantity-bar__quantity-button"}
           onClick={() => {
@@ -25,7 +25,7 @@ const ProductQuantityBar = (props: any) => {
           -
         </button>
       </div>
-      <span className={"product-quantity-bar__quantity"}>{quantity}</span>
+      <div className={"product-quantity-bar__quantity"}>{quantity}</div>
     </div>
   );
 };

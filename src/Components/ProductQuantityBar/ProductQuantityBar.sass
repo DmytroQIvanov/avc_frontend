@@ -1,23 +1,35 @@
-$Color:#a89e48
+$btn-background: #a89e48
+$change-btn-side: 40px
+
+.product-quantity-bar__quantity
+  margin: 0
+  padding: 0
+  margin-left: 10px
+  width: $change-btn-side
+  height: $change-btn-side
+  line-height: $change-btn-side
+  text-align: center
+  color: #282828
+  background-color: $btn-background
+  border-radius: 4px
+
+.product-quantity-bar,
+.product-quantity-btn-container
+  display: flex
 
 .product-quantity-bar
+  /* border: 1px solid red */
 
-  .product-quantity-bar__quantity
-    background-color: $Color
-    color: #282828
-    padding: 10px
-    border-radius: 4px
+.product-quantity-btn-container
+  flex-direction: column
+  justify-content: space-between
+  /* border: 1px solid blue */
 
-  .product-quantity-bar-container
-    margin: 5px
-    display: flex
-    .product-quantity-bar__quantity-button
-      border: none
-      border-radius: 5px
-      background-color: $Color
-      box-shadow: 3px 3px 3px 3px #1d1d1d
-      color: white
-      width: 40px
-      height: 25px
-      margin: 5px
-      cursor: pointer
+.product-quantity-bar__quantity-button
+  border: none
+  border-radius: 5px
+  background-color: $btn-background
+  box-shadow: 3px 3px 3px 3px #1d1d1d
+  color: white
+  cursor: pointer
+
