@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import ProductQuantityBar from "../../Components/ProductQuantityBar/ProductQuantityBar";
 import Comments from "./Comments/Comments";
 import ProductPageController from "./ProductPage.controller";
+import SelectInput from "../../Components/SelectInput/SelectInput";
 
 const ProductPage = () => {
   const {
@@ -63,7 +64,6 @@ const ProductPage = () => {
                         src={elem.url1}
                         style={{
                           width: "80px",
-                          // height: "50px",
                         }}
                       />
                     </div>
@@ -77,67 +77,23 @@ const ProductPage = () => {
                 </div>
 
                 <div className={"product-page__choose-block"}>
-                  {product.productVariant.length != 0 && (
-                    <div>
-                      <div>Смак*</div>
-                      <span
-                        className={"yellow-button"}
-                        onClick={handleTastePanel}
-                        style={{
-                          position: "relative",
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        {product.productVariant[choosenState.taste].taste}
-                        {tastePanel && (
-                          <div className={"model-choose-block"}>
-                            {product.productVariant.map((elem, index) => (
-                              <div
-                                onClick={() => {
-                                  dispatch(chooseTaste(index));
-                                }}
-                              >
-                                {elem.taste}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </span>
-                    </div>
-                  )}
-                  {product.productVariant[choosenState.taste].property
-                    .length && (
-                    <div>
-                      <div style={{ margin: "30px" }}>Упаковка (г,мл)*</div>
-                      <span
-                        className={"yellow-button"}
-                        onClick={handleWeightPanel}
-                      >
-                        {
-                          product.productVariant[choosenState.taste].property[
-                            choosenState.weight
-                          ]?.weight
-                        }
-                      </span>
-                      <div>
-                        {weightPanel && (
-                          <div>
-                            {product.productVariant[
-                              choosenState.taste
-                            ].property.map((elem, index) => (
-                              <div
-                                onClick={() => dispatch(chooseWeight(index))}
-                              >
-                                {elem.weight}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+                  <SelectInput
+                    naming={"Смак*"}
+                    onClick={(index) => dispatch(chooseTaste(index))}
+                    data={product.productVariant?.map((elem) => elem.taste)}
+                    choosenState={choosenState.taste}
+                    isOpen={tastePanel}
+                  />
 
+                  <SelectInput
+                    naming={"Упаковка (г,мл)*"}
+                    onClick={(index) => dispatch(chooseWeight(index))}
+                    data={product.productVariant[
+                      choosenState.taste
+                    ].property.map((elem) => elem.weight)}
+                    choosenState={choosenState.weight}
+                    isOpen={weightPanel}
+                  />
                   <ProductQuantityBar
                     product={product}
                     quantity={quantity}
