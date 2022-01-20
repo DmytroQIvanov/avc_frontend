@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import { postComment } from "../../../store/Slices/productSlice";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
 import { IProduct } from "../../../Interfaces/IProduct";
+import CommentsController from "./Comments.controller";
 
 const Comments = (props: { product: IProduct }) => {
-  const { product } = props;
-  const user = useSelector((state: RootState) => state.user.user);
-
-  const [comment, setComment] = useState("");
-  const dispatch = useDispatch();
+  const {
+    states: { comment, user, product },
+    actions: { handleCommentText, postComment },
+  } = CommentsController();
 
   return (
     <div>
@@ -21,21 +18,10 @@ const Comments = (props: { product: IProduct }) => {
               className={"default-input"}
               value={comment}
               onChange={(event) => {
-                setComment(event.target.value);
+                handleCommentText(event.target.value);
               }}
             />
-            <button
-              className={"grey-button"}
-              onClick={() => {
-                dispatch(
-                  postComment({
-                    url: `/user/comment/${product.id}`,
-                    method: "POST",
-                    data: { content: comment },
-                  })
-                );
-              }}
-            >
+            <button className={"grey-button"} onClick={postComment}>
               Отправить
             </button>
           </div>
@@ -46,11 +32,11 @@ const Comments = (props: { product: IProduct }) => {
         )}
       </div>
       <div className={"product-page__comments-container"}>
-        {!product?.comments ? (
+        {product?.comments.length == 0 ? (
           <h2>Будь першим, хто залишить коментар</h2>
         ) : (
           <div>
-            {product.comments.map((comment, index) => (
+            {product?.comments.map((comment, index) => (
               <div>
                 <div className={"comment__full-name"}>
                   {comment.user.firstName} {comment.user.lastName}

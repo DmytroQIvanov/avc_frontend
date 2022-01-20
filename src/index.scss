@@ -10,6 +10,7 @@ body {
   background-color: #1D1D1D;
   color: rgb(185, 184, 184);
   overflow-x: hidden;
+
 }
 
 code {
@@ -69,4 +70,38 @@ code {
   transition-duration: .3s;
   opacity: 0%;
   visibility: hidden;
+}
+
+
+.default-scrollbar{
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1d1d1d transparent;
+  &::-webkit-scrollbar {
+   width: 4px;
+   height: 4px;
+  }
+&::-webkit-scrollbar-track {
+   background: transparent;
+ }
+&::-webkit-scrollbar-thumb {
+   background-color: #1d1d1d;
+   border-radius: 4px;
+ }
+}
+.disable-select {
+&::selection
+ {
+   background-color:transparent;
+ }
+&::-moz-selection
+ {
+   background-color:transparent;
+ }
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+user-select: none; /* supported by Chrome and Opera */
+-webkit-user-select: none; /* Safari */
+-khtml-user-select: none; /* Konqueror HTML */
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* Internet Explorer/Edge */
 }

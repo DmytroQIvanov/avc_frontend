@@ -1,18 +1,24 @@
-@keyframes listVisibility
+@keyframes listOpen
   from
     height: 0px
   to
     height: 210px
 
+@keyframes listClose
+  from
+    height: 210px
+  to
+    height: 0px
+
 @media only screen and (min-width: 600px)
   .control-side-panel
-    width: 330px
+    width: 300px
     padding: 5px
-    min-height: 600px
+    min-height: 500px
     height: fit-content
     background: #202020
     margin-left: 8vw
-    border-radius: 16px
+    border-radius: 12px
     color: white
     font-family: Arial, Helvetica, sans-serif
     font-size: 16px
@@ -27,6 +33,9 @@
         transition-duration: .5s
         &:hover
           color: #c5b635
+          &:after
+            //transform: rotate(180deg)
+
         &:after
           content: url('../../assets/arrow.svg')
           position: absolute
@@ -36,23 +45,21 @@
 
 
       div
-        height: 0px
         opacity: 10%
+        transition-duration: 1s
+        max-height: 0px
         overflow: hidden
-        transition-duration: 3s
+
       &:hover
         div
-          transition-duration: 3s
-          height: max-content
-          animation: listVisibility 1s
+          max-height: 250px
           opacity: 100%
           overflow: hidden
-        li
-          line-height: 25px
-          padding: 5px 5px 5px 2px
-          display: flex
 
     li
+      line-height: 25px
+      padding: 5px 5px 5px 2px
+      display: flex
       list-style: none
       position: relative
       transition-duration: .3s

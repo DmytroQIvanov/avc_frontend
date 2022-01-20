@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Loader } from "../../Components/Loader/Loader";
 import { chooseTaste, chooseWeight } from "../../store/Slices/productSlice";
@@ -40,14 +40,40 @@ const ProductPage = () => {
             </Helmet>
             <div className="product-page__main-container">
               <h1 className={"product-page__mobile-name"}>{product.name}</h1>
-              <img
-                src={product.productVariant[choosenState.taste].url1}
-                key={id}
-              />
+              <div>
+                <img
+                  src={product.productVariant[choosenState.taste].url1}
+                  key={id}
+                />
+
+                <div style={{ display: "flex" }}>
+                  {product.productVariant.map((elem, index) => (
+                    <div
+                      style={{
+                        backgroundColor:
+                          choosenState.taste == index ? "yellow" : "inherit",
+                        margin: "13px 13px 13px 0px",
+                        padding: "2px",
+                        borderRadius: "10px",
+                      }}
+                      key={elem.url1}
+                      onClick={() => dispatch(chooseTaste(index))}
+                    >
+                      <img
+                        src={elem.url1}
+                        style={{
+                          width: "80px",
+                          // height: "50px",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
               <div className="product-page__title-container">
-                <h1 className="product-page__name">{product?.name}</h1>
+                <h1 className="product-page__name">{product.name}</h1>
                 <div className={"product-page__description"}>
-                  {product?.description}
+                  {product.description}
                 </div>
 
                 <div className={"product-page__choose-block"}>

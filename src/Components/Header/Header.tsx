@@ -110,7 +110,7 @@ export const Header = () => {
                 }}
               />
               {user && user.notifications?.length != 0 && (
-                <span className="header__basket-count">
+                <span className="header__element-count">
                   {user.notifications?.length}
                 </span>
               )}
