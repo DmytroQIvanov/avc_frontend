@@ -26,8 +26,7 @@ const SelectInput: React.FC<Props> = ({
           {data[choosenState || 0]}
         </div>
         {isOpen && data && (
-          <div>
-            ------------
+          <div className={styles.menu}>
             {data.map((elem, index) => (
               <div
                 onClick={() => {
