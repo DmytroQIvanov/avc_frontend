@@ -22,12 +22,13 @@
     text-align: center;
     padding: 8px 12px;
     background-color: #9a9350;
-    transition-duration: 0.5s;
     position: relative;
     border-radius: 5px;
+    //transition-duration: .5s;
     min-width: 140px;
     width: max-content;
     &_opened{
+      transition-duration: 0s;
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
     }
