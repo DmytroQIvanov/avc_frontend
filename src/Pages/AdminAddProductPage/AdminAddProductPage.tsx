@@ -8,6 +8,8 @@ import { RootState } from "../../store/store";
 const AdminAddProductPage = () => {
   const dispatch = useDispatch();
 
+  // const {}
+
   const productType = useSelector(
     (state: RootState) => state.product.productType
   );
@@ -41,6 +43,8 @@ const AdminAddProductPage = () => {
   const [oldPrice, setOldPrice] = useState("");
   const [newProduct, setNewProduct] = useState(true);
   const [images, setImages] = useState<Blob[]>([]);
+
+  const [recommendedProducts, setReccomendedProducts] = useState([]);
   return (
     <div style={{ margin: "10px" }}>
       <div>

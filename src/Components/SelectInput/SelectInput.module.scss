@@ -1,35 +1,76 @@
-.selectInput{
-  margin: 5px 10px 5px 0px;
-  transition-duration: .5s;
-  &_naming{
-    margin: 15px 15px 15px 0px;
+
+
+.selectInput {
+  margin: 0px 10px 5px 0px;
+  transition-duration: 0.5s;
+  position: relative;
+  width: max-content;
+  &_naming {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    font-weight: 600;
+    font-size: 19px;
+    color: #a4a4a4;
+    //margin: 15px 15px 15px 0px;
   }
-  &_container{
+  &_container {
+    color: #282828;
+    cursor: pointer;
     width: 120px;
     font-weight: 500;
     text-align: center;
-    padding: 10px;
-    /*border-radius: 8px;*/
-    background-color: yellow;
-    color: black;
-    transition-duration: .5s;
+    padding: 8px 12px;
+    background-color: #9a9350;
+    transition-duration: 0.5s;
     position: relative;
-    border-color: 1px solid green;
+    border-radius: 5px;
+    min-width: 140px;
+    width: max-content;
+    &_opened{
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
   }
-  &_elem{
-    padding: 5px;
+  &_elem {
     cursor: pointer;
-    &_selected{
-      background-color: #7c7a72;
+    transition-duration: 0.5s;
+    background-color: #9a9350;
+    padding: 5px 3px;
+
+    &:hover {
+      background-color: #f3c10f;
+    }
+    &_selected {
+      //background-color: #9a9350;
+      font-weight: 700;
     }
   }
 }
 
 .menu {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    width: 100%;
-    background-color: blue;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  &_close{
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+
+
+  }
+  &_open{
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
+
+  }
+  &:last-child{
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
 }
