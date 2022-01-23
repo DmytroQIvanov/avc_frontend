@@ -118,6 +118,7 @@ const routes = [
         <NavBar />
       </>
     ),
+    bottomPanel: () => <BottomPanel />,
     main: () => <ProductPage />,
   },
   {

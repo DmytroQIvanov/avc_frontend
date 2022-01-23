@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { IProduct } from "../../../Interfaces/IProduct";
 import CommentsController from "./Comments.controller";
 
-const Comments = (props: { product: IProduct }) => {
+const Comments = () => {
   const {
     states: { comment, user, product },
     actions: { handleCommentText, postComment },

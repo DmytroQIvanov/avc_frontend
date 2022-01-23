@@ -9,6 +9,21 @@ const UserMenu = () => {
     firstName: false,
     lastName: false,
   });
+
+  const [tags, setTags] = useState<string[]>([]);
+
+  const smth11 = (tag: string) => {
+    if (!tag) return;
+    if (tags.includes(tag)) return;
+    setTags((prevState) => [...prevState, tag]);
+  };
+
+  const [arrau, setArrau] = useState([
+    "ssssssssss",
+    "ssssssssss1",
+    "ssssssssss2",
+    "ssssssssss3",
+  ]);
   return (
     <div>
       <div>{user?.firstName}</div>
@@ -22,6 +37,19 @@ const UserMenu = () => {
             <div>Примечание к заказу: {elem.orderNotes}</div>
           </>
         ))}
+      </div>
+
+      <div>
+        {tags.map((elem) => (
+          <div>{elem}</div>
+        ))}
+        {arrau && (
+          <div>
+            {arrau.map((elem) => (
+              <button onClick={() => smth11(elem)}>{elem}</button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

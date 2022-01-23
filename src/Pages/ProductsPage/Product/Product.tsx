@@ -15,7 +15,7 @@ import vectorHeart from "./assets/vectorHeart.svg";
 import vectorHeartActive from "./assets/vectorHeartActive.svg";
 import { chooseTaste } from "../../../store/Slices/productSlice";
 
-export const Product = (props: { product: IProduct; admin: boolean }) => {
+export const Product = (props: { product: IProduct; admin?: boolean }) => {
   const { product, admin } = props;
   const dispatch = useDispatch();
   const [greetingStatus, displayGreeting] = useState(false);
@@ -26,7 +26,6 @@ export const Product = (props: { product: IProduct; admin: boolean }) => {
     () => ls(Math.floor(Math.random() * product.productVariant.length)),
     []
   );
-  console.log(random);
 
   return (
     <div className="product-container">
