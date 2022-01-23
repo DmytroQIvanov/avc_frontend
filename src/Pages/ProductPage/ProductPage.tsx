@@ -8,6 +8,89 @@ import ProductQuantityBar from "../../Components/ProductQuantityBar/ProductQuant
 import Comments from "./Comments/Comments";
 import ProductPageController from "./ProductPage.controller";
 import SelectInput from "../../Components/SelectInput/SelectInput";
+import { useLocation } from 'react-router';
+import { NavLink } from 'react-router-dom';
+
+const ProductInfo = (props: any) => {
+  const {
+    product,
+    tastePanel,
+    weightPanel,
+    quantity,
+    loading,
+    choosenState
+  } = props.state;
+  const {
+    handleWeightPanel,
+    handleTastePanel,
+    setQuantity,
+    addProductToBasket
+  } = props.actions;
+  const dispatch = useDispatch();
+  return product && (
+    <>
+      <div className={"product-page__description"}>
+        {product.description}
+      </div>
+
+      <div className={"product-page__choose-block"}>
+        <SelectInput
+          naming={"Смак*"}
+          onClick={(index) => dispatch(chooseTaste(index))}
+          data={product.productVariant?.map((elem: any) => elem.taste)}
+          choosenState={choosenState.taste}
+          isOpen={tastePanel}
+        />
+
+        <SelectInput
+          naming={"Упаковка (г,мл)*"}
+          onClick={(index) => dispatch(chooseWeight(index))}
+          data={product.productVariant[
+            choosenState.taste
+          ].property.map((elem: any) => elem.weight)}
+          choosenState={choosenState.weight}
+          isOpen={weightPanel}
+        />
+        <ProductQuantityBar
+          product={product}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
+      </div>
+      <div className="product-page__price-container">
+        <span className="product-page__price">
+          {
+            product.productVariant[choosenState.taste].property[
+              choosenState.weight
+            ]?.price
+          }
+          {quantity > 1 && (
+            <span>
+              {" "}
+              * {quantity} ={" "}
+              {product.productVariant[choosenState.taste].property[
+                choosenState.weight
+              ].price * quantity}
+            </span>
+          )}{" "}
+          грн
+        </span>
+
+        <span className="product-page__cost-of-delivery">
+          Вартiсть доставки вiд 60 грн
+        </span>
+      </div>
+      <div className={"product-page__buy-block"}>
+        <button
+          className="product-page__buy-button"
+          onClick={addProductToBasket}
+        >
+          Додати до кошику
+        </button>
+      </div>
+    </>
+    );
+}
 
 const ProductPage = () => {
   const {
@@ -27,8 +110,12 @@ const ProductPage = () => {
       addProductToBasket,
     },
   } = ProductPageController();
-  const dispatch = useDispatch();
+  const productState = { product, tastePanel, weightPanel, quantity, loading, choosenState };
+  const productActions = { handleWeightPanel, handleTastePanel, setQuantity, addProductToBasket };
 
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const baseUrl = location.pathname;
   return (
     <>
       <div className="product-page">
@@ -41,6 +128,7 @@ const ProductPage = () => {
             </Helmet>
             <div className="product-page__main-container">
               <h1 className={"product-page__mobile-name"}>{product.name}</h1>
+              
               <div>
                 <img
                   src={product.productVariant[choosenState.taste].url1}
@@ -72,65 +160,12 @@ const ProductPage = () => {
               </div>
               <div className="product-page__title-container">
                 <h1 className="product-page__name">{product.name}</h1>
-                <div className={"product-page__description"}>
-                  {product.description}
+                <div className="changeProductContent">
+                  <NavLink to={baseUrl}>Опис товару</NavLink>
+                  <NavLink to={`${baseUrl}/comments`}>Відгуки</NavLink>
+                  <NavLink to={`${baseUrl}/buy`}>Замовити</NavLink>
                 </div>
-
-                <div className={"product-page__choose-block"}>
-                  <SelectInput
-                    naming={"Смак*"}
-                    onClick={(index) => dispatch(chooseTaste(index))}
-                    data={product.productVariant?.map((elem) => elem.taste)}
-                    choosenState={choosenState.taste}
-                    isOpen={tastePanel}
-                  />
-
-                  <SelectInput
-                    naming={"Упаковка (г,мл)*"}
-                    onClick={(index) => dispatch(chooseWeight(index))}
-                    data={product.productVariant[
-                      choosenState.taste
-                    ].property.map((elem) => elem.weight)}
-                    choosenState={choosenState.weight}
-                    isOpen={weightPanel}
-                  />
-                  <ProductQuantityBar
-                    product={product}
-                    quantity={quantity}
-                    setQuantity={setQuantity}
-                  />
-                </div>
-                <div className="product-page__price-container">
-                  <span className="product-page__price">
-                    {
-                      product.productVariant[choosenState.taste].property[
-                        choosenState.weight
-                      ]?.price
-                    }
-                    {quantity > 1 && (
-                      <span>
-                        {" "}
-                        * {quantity} ={" "}
-                        {product.productVariant[choosenState.taste].property[
-                          choosenState.weight
-                        ].price * quantity}
-                      </span>
-                    )}{" "}
-                    грн
-                  </span>
-
-                  <span className="product-page__cost-of-delivery">
-                    Вартiсть доставки вiд 60 грн
-                  </span>
-                </div>
-                <div className={"product-page__buy-block"}>
-                  <button
-                    className="product-page__buy-button"
-                    onClick={addProductToBasket}
-                  >
-                    Додати до кошику
-                  </button>
-                </div>
+                <ProductInfo state={productState} actions={productActions} />
               </div>
             </div>
             <Comments product={product} />
