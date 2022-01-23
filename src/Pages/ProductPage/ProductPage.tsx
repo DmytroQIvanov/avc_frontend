@@ -52,7 +52,7 @@ const ProductPage = () => {
                   <h2>З цим також купують:</h2>
                   <div style={{ display: "flex" }}>
                     {products.map((elem) => (
-                      <Product product={elem} />
+                      <Product product={elem} key={elem.id} />
                     ))}
                   </div>
                 </div>

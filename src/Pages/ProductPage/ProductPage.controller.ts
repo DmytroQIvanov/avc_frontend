@@ -31,11 +31,11 @@ const ProductPageController = () => {
   //USE-EFFECTS
   useEffect(() => {
     dispatch(getProductStart({ url: "/product", id: params.id }));
-  }, []);
+  }, [window.location.href]);
 
   useEffect(() => {
     dispatch(getProductsStart({ url: "/product", method: "POST" }));
-  });
+  }, []);
 
   //ACTIONS
 
