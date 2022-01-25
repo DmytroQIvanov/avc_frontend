@@ -1,0 +1,7 @@
+.Textarea{
+  //width: max-content !important;
+  height: 140px;
+  &_error{
+    color: rgba(175, 41, 41, 0.69) !important;
+  }
+}

@@ -1,121 +1,70 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductStart } from "../../store/Slices/productSlice";
-import { ProductVariant } from "./TypeComponent/ProductVariant";
-import { TypeComponent } from "./TypeComponent/TypeComponent";
-import { RootState } from "../../store/store";
+import useAddProductController from "./useAddProduct.controller";
+import Input from "../../Components/Input/Input";
+import { useForm } from "react-hook-form";
+import {
+  createRef,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import Textarea from "../../Components/Textarea/Textarea";
 
 const AdminAddProductPage = () => {
-  const dispatch = useDispatch();
+  const {
+    states: { countProductVariant, ProductVariantComponent },
+    actions: { setCountProductVariant },
+    forms: { register, errors, handleSubmit, onSubmit },
+  } = useAddProductController();
 
-  // const {}
-
-  const productType = useSelector(
-    (state: RootState) => state.product.productType
-  );
-  const productVariant = useSelector(
-    (state: RootState) => state.product.productVariant
-  );
-  const addProduct = (images: Blob[]) => {
-    if (!productType) {
-      return;
-    }
-    const data = new FormData();
-    data.append("name", name);
-    data.append("description", description);
-    data.append("price", price);
-    data.append("oldPrice", oldPrice);
-    data.append("newProduct", newProduct.toString());
-    data.append("ration", "33");
-    data.append("productVariant", JSON.stringify(productVariant));
-    data.append("type", productType);
-    images.forEach((elem, i) => {
-      data.append(`file-${i}`, elem);
-    });
-    dispatch(
-      getProductStart({ url: "/admin/addProduct", method: "POST", data })
-    );
-  };
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [numberOfProducts, setNumberOfProducts] = useState("0");
-  const [price, setPrice] = useState("0");
-  const [oldPrice, setOldPrice] = useState("");
-  const [newProduct, setNewProduct] = useState(true);
-  const [images, setImages] = useState<Blob[]>([]);
-
-  const [recommendedProducts, setReccomendedProducts] = useState([]);
   return (
-    <div style={{ margin: "10px" }}>
-      <div>
-        <div>Название товара</div>
-        <input
-          type="name"
-          onChange={(elem) => setName(elem.target.value)}
-          value={name}
-          className={"default-input"}
+    <main style={{ margin: "10px" }}>
+      <form onSubmit={onSubmit}>
+        <Input
+          name={"Название товара"}
+          inputName={"name"}
+          register={register}
+          errorMessage={errors.name?.message}
+          placeholder={"Protein"}
         />
-      </div>
-
-      <div>
-        <div>Описание товара</div>
-        <textarea
-          onChange={(elem) => {
-            setDescription(elem.target.value);
-          }}
-          value={description}
-          className={"default-input"}
-          style={{ height: "240px", width: "95%" }}
+        <Input
+          type={"checkbox"}
+          name={"Популярность"}
+          inputName={"popular"}
+          register={register}
         />
-      </div>
-
-      <div>
-        <div>Количество товара на складе</div>
-        <input
-          type="number"
-          onChange={(elem) => {
-            setNumberOfProducts(elem.target.value);
-          }}
-          value={numberOfProducts}
-          className={"default-input"}
+        <Textarea
+          name={"Предварительное описание товара"}
+          inputName={"preDescription"}
+          register={register}
+          errorMessage={errors.preDescription?.message}
+          type={"textarea"}
         />
-      </div>
-
-      {/*<div>*/}
-      {/*  <div>Цена товара: </div>*/}
-      {/*  <input*/}
-      {/*    type="number"*/}
-      {/*    onChange={(elem) => {*/}
-      {/*      setPrice(elem.target.value);*/}
-      {/*    }}*/}
-      {/*    value={price}*/}
-      {/*    className={"default-input"}*/}
-      {/*  />*/}
-      {/*</div>*/}
-
-      <div>
-        <div>Рейтинг</div>
-        <input type="number" max={11} min={0} className={"default-input"} />
-      </div>
-
-      <button onClick={() => console.log(images)}>s</button>
-
-      <div>
-        <TypeComponent />
-      </div>
-      <div>
-        <ProductVariant setImages={setImages} images={images} />
-      </div>
-
-      <button
-        onClick={() => {
-          if (images.length != 0) addProduct(images);
-        }}
-        className={"yellow-button"}
-      >
-        Создать
-      </button>
-    </div>
+        <Textarea
+          name={"Описание товара"}
+          inputName={"description"}
+          register={register}
+          errorMessage={errors.description?.message}
+          type={"textarea"}
+        />
+        <Input
+          name={"Количество товара"}
+          inputName={"numberOfProduct"}
+          register={register}
+          type={"number"}
+          errorMessage={errors.numberOfProduct?.message}
+        />
+        <ProductVariantComponent />
+        <button
+          type={"button"}
+          onClick={() => setCountProductVariant((prevState) => prevState + 1)}
+        >
+          Add {countProductVariant}
+        </button>
+        <button type="submit">Создать</button>
+      </form>
+    </main>
   );
 };
 

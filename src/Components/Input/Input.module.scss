@@ -1,0 +1,7 @@
+.Input{
+  width: max-content !important;
+  &_error{
+    //color: rgba(175, 41, 41, 0.69) !important;
+    border: 1px solid rgba(175, 41, 41, 0.69) !important;
+  }
+}
