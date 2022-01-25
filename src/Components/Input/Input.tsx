@@ -6,7 +6,14 @@ type InputProps = {
   inputName: string;
   register: any;
   errorMessage?: string;
-  type?: "text" | "password" | "email" | "checkbox" | "number" | "textarea";
+  type?:
+    | "text"
+    | "password"
+    | "email"
+    | "checkbox"
+    | "number"
+    | "textarea"
+    | "file";
   onChange?: Function;
   value?: any;
   placeholder?: string;
