@@ -16,52 +16,52 @@ const SelectInput: React.FC<Props> = ({
   choosenState,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  // const [timer, setTimer] = useState(100);
   if (data.length <= 0) return <></>;
-  const openSelect = async () => {
+  const openSelect = () => {
     setIsOpen((prevState) => !prevState);
-    // const res = await setTimeout(() => {
-    //   setTimer((prevState) => prevState - 10);
-    //   alert();
-    //   console.log(timer);
-    // }, 10);
-    // while (timer > 10 && isOpen) {
-    //   console.log(res);
-    //   return res;
-    // if (timer <= 10) {
-    //   setIsOpen(false);
-    // }
-    // }
   };
+  const getMenuStyle = () => {
+    const menuOpen = isOpen && data;
+    const s = styles.menu + ' ' +
+              (menuOpen ? styles.menu_open : 
+                          styles.menu_close);
+    return s;
+  };
+  const arrowStyle = () => {
+      let s = styles.arrow + ' ';
+      if (isOpen) s += styles['arrow-up'];
+      return s;
+  };
+  const itemStyle = styles.selectInput_elem;
+  const selectedStyle = styles.selectInput_elem_selected;
   return (
-    <div className={styles.selectInput}>
+    <div className={styles.selectInput}
+         onClick={openSelect} >
+
       <div className={styles.selectInput_naming}>{naming}</div>
       <div
         className={`${styles.selectInput_container} ${
           isOpen && styles.selectInput_container_opened
         }`}
       >
-        <div
-          onClick={() => {
-            openSelect();
-          }}
-        >
-          {data[choosenState || 0]}
+        <div className={styles.selectInput_innerContainer}>
+          <div>
+            {data[choosenState || 0]}
+          </div>
+          <div className={arrowStyle()} />
         </div>
         <div
-          className={`${styles.menu} ${
-            isOpen && data ? styles.menu_open : styles.menu_close
-          }`}
+          className={getMenuStyle()}
         >
           {data.map((elem, index) => (
             <div
               onClick={() => {
                 onClick(index);
                 setIsOpen(false);
+                console.log('is open:', isOpen);
               }}
-              className={`${styles.selectInput_elem} ${
-                index == choosenState && styles.selectInput_elem_selected
+              className={`${itemStyle} ${
+                index == choosenState && selectedStyle
               }`}
             >
               {elem}
