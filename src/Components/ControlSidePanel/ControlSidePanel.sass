@@ -39,19 +39,21 @@
         &:after
           content: url('../../assets/arrow.svg')
           position: absolute
-          right: 5px
+          transform: scale(0.75)
+          right: 10px
           cursor: pointer
           transition-duration: .3s
 
 
       div
         opacity: 10%
-        transition-duration: 1s
+        transition-duration: .8s
         max-height: 0px
         overflow: hidden
 
       &:hover
-        div
+        divc
+          transition-duration: 1s
           max-height: 250px
           opacity: 100%
           overflow: hidden

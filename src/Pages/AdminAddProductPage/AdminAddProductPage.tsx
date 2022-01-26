@@ -14,8 +14,13 @@ import BubbleListInput from "../../Components/BubbleListInput/BubbleListInput";
 
 const AdminAddProductPage = () => {
   const {
-    states: { countProductVariant, ProductVariantComponent, products },
-    actions: { setCountProductVariant },
+    states: {
+      countProductVariant,
+      ProductVariantComponent,
+      products,
+      selectedProducts,
+    },
+    actions: { setCountProductVariant, onClick },
     forms: { register, errors, handleSubmit, onSubmit },
   } = useAddProductController();
 
@@ -49,6 +54,9 @@ const AdminAddProductPage = () => {
           errorMessage={errors.description?.message}
           type={"textarea"}
         />
+        {selectedProducts.map((elem) => (
+          <>{elem}</>
+        ))}
         <Input
           name={"Количество товара"}
           inputName={"numberOfProduct"}
@@ -56,7 +64,7 @@ const AdminAddProductPage = () => {
           type={"number"}
           errorMessage={errors.numberOfProduct?.message}
         />
-        <BubbleListInput list={products} />
+        <BubbleListInput list={products} onClick={onClick} />
         <ProductVariantComponent />
         <button
           type={"button"}

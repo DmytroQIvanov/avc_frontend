@@ -12,6 +12,7 @@ import { useMemo, useState } from "react";
 import logo from "../../../assets/logo.svg";
 import { RootState } from "../../../store/store";
 import vectorHeart from "./assets/vectorHeart.svg";
+import vectorFire from "./assets/fire.svg";
 import vectorHeartActive from "./assets/vectorHeartActive.svg";
 import { chooseTaste } from "../../../store/Slices/productSlice";
 
@@ -62,6 +63,21 @@ export const Product = (props: { product: IProduct; admin?: boolean }) => {
               <img
                 src={vectorHeartActive}
                 className={"product__heart_inactive"}
+              />
+            )}
+            {true && (
+              <img
+                src={vectorFire}
+                className={"product__fire"}
+                onClick={() => {
+                  // dispatch(
+                  //     addProductToFavouriteStart({
+                  //       url: "/user/favourite",
+                  //       method: "PATCH",
+                  //       data: { productId: product.id, product },
+                  //     })
+                  // );
+                }}
               />
             )}
           </div>

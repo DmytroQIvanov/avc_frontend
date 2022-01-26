@@ -32,6 +32,15 @@ const useAddProductController = () => {
       recommendedProducts: [],
     },
   });
+
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+  const onClick = (result: string) => {
+    if (!selectedProducts.includes(result)) {
+      setSelectedProducts((prevState) => [...prevState, result]);
+    } else {
+      setSelectedProducts(selectedProducts.filter((elem) => elem !== result));
+    }
+  };
   const [countProductVariant, setCountProductVariant] = useState(1);
 
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -101,8 +110,13 @@ const useAddProductController = () => {
     );
   };
   return {
-    actions: { addProduct, setCountProductVariant },
-    states: { countProductVariant, ProductVariantComponent, products },
+    actions: { addProduct, setCountProductVariant, onClick },
+    states: {
+      countProductVariant,
+      ProductVariantComponent,
+      products,
+      selectedProducts,
+    },
     forms: { register, handleSubmit, errors, onSubmit },
   };
 };

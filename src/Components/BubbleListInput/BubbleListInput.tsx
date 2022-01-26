@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { IProduct } from "../../Interfaces/IProduct";
 
 type bubbleProps = {
   list: IProduct[];
   // list: IProduct[] | string[];
-  onClick?: () => void;
+  onClick?: (id: string) => void;
   visibility?: boolean;
 };
 
@@ -14,7 +14,10 @@ const BubbleListInput: React.FC<bubbleProps> = ({
   onClick,
 }) => {
   const listResult = list.map((elem) => (
-    <div style={{ display: "flex" }}>
+    <div
+      style={{ display: "flex" }}
+      onClick={() => onClick && elem && onClick(elem.id.toString())}
+    >
       <img src={elem.productVariant[0].url1} height={"50px"} />
       <div style={{ margin: "auto 0" }}>{elem.name}</div>
     </div>
