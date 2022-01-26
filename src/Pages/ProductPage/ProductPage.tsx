@@ -10,6 +10,33 @@ import ChangeProductComponent from "./ChangeProductComponent/ChangeProductCompon
 import Comments from "./Comments/Comments";
 import { Product } from "../ProductsPage/Product/Product";
 
+type Dict = {
+    [key: string]: string;
+};
+
+const Table = (props: any) => {
+    const { data } = props;
+    
+    const rows = Object.entries(data).map((keyValue: any) => (
+        <tr>
+            <td>{keyValue[0]}:</td>
+            <td>{keyValue[1]}</td>
+        </tr>
+    ));
+
+    return (
+        <table>
+            { rows }
+        </table>
+    );
+};
+
+const obj = {
+    'Країна': 'Україна',
+    'Розмір порції': '14 г',
+    'Кількість порцій': '35'
+};
+
 const ProductPage = () => {
   const {
     states: { product, loading, choosenState, products },
@@ -60,9 +87,12 @@ const ProductPage = () => {
                   {(selectedPanelIndex) => (
                     <>
                       {selectedPanelIndex == 0 && (
-                        <div className={"product-page__description"}>
-                          {product.description}
-                        </div>
+                        <>
+                            <div className={"product-page__description"}>
+                              {product.description}
+                            </div>
+                            <Table data={obj} />
+                        </>
                       )}
                       {selectedPanelIndex == 1 && <Comments />}
                     </>
@@ -88,7 +118,6 @@ const ProductInfo = (props: any) => {
         <div className={"product-page__pre-description"}>
           {product.description}
         </div>
-
         <div className={"product-page__choose-block"}>
           <SelectInput
             naming={"Смак*"}
