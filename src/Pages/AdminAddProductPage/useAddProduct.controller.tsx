@@ -10,6 +10,8 @@ import { PostProductDTO } from "../../DTOs/ProductDTO";
 import Input from "../../Components/Input/Input";
 import VariantComponent from "./VariantComponent/VariantComponent";
 import { type } from "os";
+import axios from "axios";
+import { hostAddress } from "../../config";
 
 const useAddProductController = () => {
   //FORM
@@ -31,6 +33,14 @@ const useAddProductController = () => {
     },
   });
   const [countProductVariant, setCountProductVariant] = useState(1);
+
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    axios
+      .post(`${hostAddress}/product`)
+      .then((elem) => setProducts(elem.data.products));
+  }, []);
 
   //PRODUCT VARIANT
 
@@ -92,7 +102,7 @@ const useAddProductController = () => {
   };
   return {
     actions: { addProduct, setCountProductVariant },
-    states: { countProductVariant, ProductVariantComponent },
+    states: { countProductVariant, ProductVariantComponent, products },
     forms: { register, handleSubmit, errors, onSubmit },
   };
 };

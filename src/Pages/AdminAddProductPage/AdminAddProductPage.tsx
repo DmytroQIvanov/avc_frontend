@@ -10,10 +10,11 @@ import {
   useState,
 } from "react";
 import Textarea from "../../Components/Textarea/Textarea";
+import BubbleListInput from "../../Components/BubbleListInput/BubbleListInput";
 
 const AdminAddProductPage = () => {
   const {
-    states: { countProductVariant, ProductVariantComponent },
+    states: { countProductVariant, ProductVariantComponent, products },
     actions: { setCountProductVariant },
     forms: { register, errors, handleSubmit, onSubmit },
   } = useAddProductController();
@@ -55,6 +56,7 @@ const AdminAddProductPage = () => {
           type={"number"}
           errorMessage={errors.numberOfProduct?.message}
         />
+        <BubbleListInput list={products} />
         <ProductVariantComponent />
         <button
           type={"button"}

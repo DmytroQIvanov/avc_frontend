@@ -1,10 +1,14 @@
 
 
 .selectInput {
-  margin: 0px 10px 5px 0px;
+  margin: 0px 10px 0px 0px;
   transition-duration: 0.5s;
   position: relative;
   width: max-content;
+
+  transition: max-width 0.5s cubic-bezier(0, 1, 0, 1);
+  transition-duration: .4s;
+  transition-property: width;
   &_naming {
     position: absolute;
     top: -30px;
@@ -15,20 +19,23 @@
     //margin: 15px 15px 15px 0px;
   }
   &_container {
+
     box-sizing: border-box;
     color: #282828;
     cursor: pointer;
-    width: 120px;
+    //width: 120px;
     font-weight: 500;
     text-align: center;
-    padding: 0px 00px;
+    padding: 0px 40px;
     background-color: #9a9350;
     position: relative;
     border-radius: 5px;
     //transition-duration: .5s;
-    min-width: 140px;
-    width: 300px;
-    height: 30px;
+    min-width: 100px;
+    //width: 300px;
+    //height: 30px;
+
+
     &_opened{
       transition-duration: 0s;
       border-bottom-left-radius: 0px;
@@ -51,23 +58,27 @@
   }
 
   &_innerContainer {
-      display: flex;
+      //display: flex;
       align-items: center;
       height: 100%;
-      padding-left: 20px;
+      //padding-left: 20px;
   }
 
   .arrow {
     background: url('./arrow.svg');
-    background-size: 30px 15px;
-    width: 30px;
+    background-size: 20px 15px;
+    width: 20px;
     height: 15px;
-    margin-left: auto;
-    margin-right: 5px;
+    position: absolute;
+    right: 7px;
+    top:7px;
+    transition-duration: 0.4s;
+    transition-property: transform;
+    //-webkit-transition: all 0.5s ;
   }
 
   .arrow-up {
-      transform: rotateX(180deg);
+    transform: rotate(180deg);
   }
 }
 
