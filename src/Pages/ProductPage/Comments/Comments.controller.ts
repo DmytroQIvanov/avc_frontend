@@ -17,7 +17,7 @@ function CommentsController() {
   const handleCommentText = (value: string) => {
     setComment(value);
   };
-  const postComment = () => {
+  const postComment = (comment: string) => {
     if (product)
       dispatch(
         postCommentSlice({

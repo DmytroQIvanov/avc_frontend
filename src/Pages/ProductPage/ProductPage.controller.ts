@@ -5,7 +5,7 @@ import {
   getProductStart,
 } from "../../store/Slices/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { RootState } from "../../store/store";
 import { addProductToBasketStart } from "../../store/Slices/userSlice";
 import { IProduct } from "../../Interfaces/IProduct";
@@ -22,6 +22,7 @@ const ProductPageController = () => {
   const [selectedPanelIndex, setSelectedPanelIndex] = useState(0);
   const params: { id: string } = useParams();
   const product = useSelector((state: RootState) => state.product.product);
+  const user = useSelector((state: RootState) => state.user.user);
   const products = useSelector((state: RootState) => state.products.products);
   const choosenState = useSelector(
     (state: RootState) => state.product.choosenState
@@ -37,6 +38,7 @@ const ProductPageController = () => {
     dispatch(getProductsStart({ url: "/product", method: "POST" }));
   }, []);
 
+  const rout = useHistory();
   //ACTIONS
 
   const handleTastePanel = () => {
@@ -59,6 +61,10 @@ const ProductPageController = () => {
   };
   const addProductToBasket = () => {
     if (!product) return;
+    if (!user) {
+      rout.push("/login");
+      return;
+    }
     dispatch(
       addProductToBasketStart({
         url: `/user/product/${product.id}`,

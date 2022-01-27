@@ -13,7 +13,7 @@ type WrapperProps = {
 
 const Wrapper: React.FC<WrapperProps> = ({ children, meta, loading }) => {
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <Helmet>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />

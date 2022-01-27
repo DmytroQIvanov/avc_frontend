@@ -18,8 +18,20 @@ const ChangeProductComponent: React.FC<ChangeProductComponent> = ({
   return (
     <div className={styles.changeProductContent}>
       <div className="changeProductContent">
-        <span onClick={() => setSelectedIndex(0)}>Опис товару</span>
-        <span onClick={() => setSelectedIndex(1)}>
+        <span
+          onClick={() => setSelectedIndex(0)}
+          className={`${
+            selectedPanelIndex == 0 && styles.changeProductContent__title_active
+          }`}
+        >
+          Опис товару
+        </span>
+        <span
+          onClick={() => setSelectedIndex(1)}
+          className={`${
+            selectedPanelIndex == 1 && styles.changeProductContent__title_active
+          }`}
+        >
           Відгуки{" "}
           {commentsNumber && commentsNumber >= 1 ? `(${commentsNumber})` : ""}
         </span>

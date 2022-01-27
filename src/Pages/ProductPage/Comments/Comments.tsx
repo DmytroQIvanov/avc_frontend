@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CommentsController from "./Comments.controller";
+import CommentInput from "./CommentInput/CommentInput";
 
 const Comments = () => {
   const {
@@ -13,16 +14,7 @@ const Comments = () => {
       <div className={"product-page__comment-input-container"}>
         {user ? (
           <div className={"product-page__comment-input"}>
-            <textarea
-              className={"default-input"}
-              value={comment}
-              onChange={(event) => {
-                handleCommentText(event.target.value);
-              }}
-            />
-            <button className={"grey-button"} onClick={postComment}>
-              Отправить
-            </button>
+            <CommentInput onClick={postComment} />
           </div>
         ) : (
           <div style={{ display: "flex", position: "relative" }}>

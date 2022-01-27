@@ -11,29 +11,25 @@
   transition-property: width;
   &_naming {
     position: absolute;
-    top: -30px;
-    left: 0;
-    font-weight: 600;
-    font-size: 19px;
+    top: -26px;
+    left: 1px;
+    font-weight: 700;
+    font-size: 17px;
     color: #a4a4a4;
-    //margin: 15px 15px 15px 0px;
+
   }
   &_container {
 
     box-sizing: border-box;
     color: #282828;
     cursor: pointer;
-    //width: 120px;
     font-weight: 500;
     text-align: center;
-    padding: 0px 40px;
+    padding: 2px 45px;
     background-color: #9a9350;
     position: relative;
     border-radius: 5px;
-    //transition-duration: .5s;
-    min-width: 100px;
-    //width: 300px;
-    //height: 30px;
+    min-width: 155px;
 
 
     &_opened{

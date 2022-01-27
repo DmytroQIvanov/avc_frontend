@@ -41,19 +41,16 @@ const SelectInput: React.FC<Props> = ({
           isOpen && styles.selectInput_container_opened
         }`}
       >
-        {/*<div className={styles.selectInput_innerContainer}>*/}
         <div style={{ margin: "auto", display: "block", lineHeight: "27px" }}>
           {data[choosenState || 0]}
           <div className={arrowStyle()} />
         </div>
-        {/*</div>*/}
         <div className={getMenuStyle()}>
           {data.map((elem, index) => (
             <div
               onClick={() => {
                 onClick(index);
                 setIsOpen(false);
-                console.log("is open:", isOpen);
               }}
               className={`${itemStyle} ${
                 index == choosenState && selectedStyle
