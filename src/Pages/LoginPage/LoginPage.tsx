@@ -44,6 +44,9 @@ const LoginPage = () => {
             type="password"
           />
         </div>
+        <Link to="/restore">
+            <div>Забули пароль?</div>
+        </Link>
         <Link to="/registration">
           <div>{t("login.account")}</div>
           <div>{t("login.register")}</div>

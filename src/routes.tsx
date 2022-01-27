@@ -11,6 +11,7 @@ import FavouritePage from "./Pages/FavouritePage/FavouritePage";
 
 //Lazy Loading
 const LoginPage = lazy(() => import("./Pages/LoginPage/LoginPage"));
+const RestoreLoginPage = lazy(() => import("./Pages/RestoreLoginPage/RestoreLoginPage"))
 const ProductPage = lazy(() => import("./Pages/ProductPage/ProductPage"));
 
 const UserMenu = lazy(() => import("./Pages/UserMenu/UserMenu"));
@@ -140,6 +141,16 @@ const routes = [
       </>
     ),
     main: () => <RegistrationPage />,
+  },
+  {
+    path: "/restore",
+    exact: true,
+    navbar: () => (
+      <>
+        <Header />
+      </>
+    ),
+    main: () => <RestoreLoginPage />,
   },
   {
     path: "/basket",
