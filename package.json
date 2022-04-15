@@ -2,7 +2,7 @@
   "name": "avc-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dmytroqivanov.github.io/avc-frontend",
+  "homepage": ".",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -32,7 +32,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "predeploy": "npm run build && npm install -g serve ",
+    "predeploy": "npm install -g serve  && npm run build",
     "deploy": "gh-pages -d build",
     "start": "npx serve -s build",
     "start:dev": "react-scripts start",
