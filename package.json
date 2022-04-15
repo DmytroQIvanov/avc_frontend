@@ -2,7 +2,6 @@
   "name": "avc-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -34,7 +33,7 @@
   "scripts": {
     "predeploy": "npm install -g serve  && npm run build",
     "deploy": "gh-pages -d build",
-    "start": "npx serve -s build",
+    "start": "npx serve -s -l 3000 build",
     "start:dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

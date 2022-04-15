@@ -9,6 +9,7 @@ import ProductImages from "./ProductImages/ProductImages";
 import ChangeProductComponent from "./ChangeProductComponent/ChangeProductComponent";
 import Comments from "./Comments/Comments";
 import { Product } from "../ProductsPage/Product/Product";
+import { LoadingPage } from "../LoadingPage/LoadingPage";
 
 type Dict = {
   [key: string]: string;
@@ -52,7 +53,7 @@ const ProductPage = () => {
       {/*  meta={{ description: product?.description, title: product?.name }}*/}
       {/*  children={*/}
       <div className="product-page">
-        {!loading && product && (
+        {!loading && product ? (
           <>
             <div className="product-page__main-container">
               <h1 className={"product-page__mobile-name"}>{product.name}</h1>
@@ -93,6 +94,8 @@ const ProductPage = () => {
               )}
             </ChangeProductComponent>
           </>
+        ) : (
+          <LoadingPage />
         )}
       </div>
       {/*}*/}
