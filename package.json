@@ -2,6 +2,7 @@
   "name": "avc-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dmytroqivanov.github.io/avc-frontend",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -31,6 +32,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -60,6 +63,7 @@
     "@types/react": "^17.0.16",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
+    "gh-pages": "^3.2.3",
     "typescript": "^4.3.5"
   },
   "engines": {
