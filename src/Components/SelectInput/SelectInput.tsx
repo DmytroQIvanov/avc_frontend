@@ -55,6 +55,7 @@ const SelectInput: React.FC<Props> = ({
               className={`${itemStyle} ${
                 index == choosenState && selectedStyle
               }`}
+              key={index}
             >
               {elem}
             </div>

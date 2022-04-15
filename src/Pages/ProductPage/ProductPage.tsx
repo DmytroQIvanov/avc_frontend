@@ -11,30 +11,28 @@ import Comments from "./Comments/Comments";
 import { Product } from "../ProductsPage/Product/Product";
 
 type Dict = {
-    [key: string]: string;
+  [key: string]: string;
 };
 
 const Table = (props: any) => {
-    const { data } = props;
-    
-    const rows = Object.entries(data).map((keyValue: any) => (
-        <tr>
-            <td>{keyValue[0]}:</td>
-            <td>{keyValue[1]}</td>
-        </tr>
-    ));
+  const { data } = props;
 
-    return (
-        <table>
-            { rows }
-        </table>
-    );
+  const rows = Object.entries(data).map((keyValue: any) => (
+    <tbody key={keyValue[0]}>
+      <tr>
+        <td>{keyValue[0]}:</td>
+        <td>{keyValue[1]}</td>
+      </tr>
+    </tbody>
+  ));
+
+  return <table>{rows}</table>;
 };
 
 const obj = {
-    'Країна': 'Україна',
-    'Розмір порції': '14 г',
-    'Кількість порцій': '35'
+  Країна: "Україна",
+  "Розмір порції": "14 г",
+  "Кількість порцій": "35",
 };
 
 const ProductPage = () => {
@@ -88,10 +86,10 @@ const ProductPage = () => {
                     <>
                       {selectedPanelIndex == 0 && (
                         <>
-                            <div className={"product-page__description"}>
-                              {product.description}
-                            </div>
-                            <Table data={obj} />
+                          <div className={"product-page__description"}>
+                            {product.description}
+                          </div>
+                          <Table data={obj} />
                         </>
                       )}
                       {selectedPanelIndex == 1 && <Comments />}
@@ -125,6 +123,7 @@ const ProductInfo = (props: any) => {
             data={product.productVariant?.map((elem: any) => elem.taste)}
             choosenState={choosenState.taste}
             isOpen={tastePanel}
+            key={"ss22ss"}
           />
 
           <SelectInput
@@ -135,6 +134,7 @@ const ProductInfo = (props: any) => {
             )}
             choosenState={choosenState.weight}
             isOpen={weightPanel}
+            key={"ssss"}
           />
           <ProductQuantityBar
             product={product}
