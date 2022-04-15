@@ -34,7 +34,7 @@
   "scripts": {
     "predeploy": "npm run build && npm install -g serve ",
     "deploy": "gh-pages -d build",
-    "start": "serve -s build",
+    "start": "npx serve -s build",
     "start:dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
