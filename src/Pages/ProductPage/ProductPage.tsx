@@ -47,60 +47,56 @@ const ProductPage = () => {
   // const baseUrl = location.pathname;
   return (
     <div style={{ position: "relative" }}>
-      <Wrapper
-        loading={loading}
-        meta={{ description: product?.description, title: product?.name }}
-        children={
-          <div className="product-page">
-            {!loading && product && (
-              <>
-                <div className="product-page__main-container">
-                  <h1 className={"product-page__mobile-name"}>
-                    {product.name}
-                  </h1>
+      {/*<Wrapper*/}
+      {/*  loading={loading}*/}
+      {/*  meta={{ description: product?.description, title: product?.name }}*/}
+      {/*  children={*/}
+      <div className="product-page">
+        {!loading && product && (
+          <>
+            <div className="product-page__main-container">
+              <h1 className={"product-page__mobile-name"}>{product.name}</h1>
 
-                  <ProductImages
-                    arrayImages={product.productVariant.map(
-                      (elem) => elem.url1
-                    )}
-                    mainImage={product.productVariant[choosenState.taste].url1}
-                    onClick={chooseTasteF}
-                    choosenState={choosenState.taste}
-                  />
+              <ProductImages
+                arrayImages={product.productVariant.map((elem) => elem.url1)}
+                mainImage={product.productVariant[choosenState.taste].url1}
+                onClick={chooseTasteF}
+                choosenState={choosenState.taste}
+              />
 
-                  <div className="product-page__title-container">
-                    <h1 className="product-page__name">{product.name}</h1>
-                    <ProductInfo state={states} actions={actions} />
-                  </div>
-                </div>
-                <div style={{ marginTop: "100px" }}>
-                  <h2>З цим також купують:</h2>
-                  <div style={{ display: "flex" }}>
-                    {products.map((elem) => (
-                      <Product product={elem} key={elem.id} />
-                    ))}
-                  </div>
-                </div>
-                <ChangeProductComponent>
-                  {(selectedPanelIndex) => (
+              <div className="product-page__title-container">
+                <h1 className="product-page__name">{product.name}</h1>
+                <ProductInfo state={states} actions={actions} />
+              </div>
+            </div>
+            <div style={{ marginTop: "100px" }}>
+              <h2>З цим також купують:</h2>
+              <div style={{ display: "flex" }}>
+                {products.map((elem) => (
+                  <Product product={elem} key={elem.id} />
+                ))}
+              </div>
+            </div>
+            <ChangeProductComponent>
+              {(selectedPanelIndex) => (
+                <>
+                  {selectedPanelIndex == 0 && (
                     <>
-                      {selectedPanelIndex == 0 && (
-                        <>
-                          <div className={"product-page__description"}>
-                            {product.description}
-                          </div>
-                          <Table data={obj} />
-                        </>
-                      )}
-                      {selectedPanelIndex == 1 && <Comments />}
+                      <div className={"product-page__description"}>
+                        {product.description}
+                      </div>
+                      <Table data={obj} />
                     </>
                   )}
-                </ChangeProductComponent>
-              </>
-            )}
-          </div>
-        }
-      />
+                  {selectedPanelIndex == 1 && <Comments />}
+                </>
+              )}
+            </ChangeProductComponent>
+          </>
+        )}
+      </div>
+      {/*}*/}
+      {/*/>*/}
     </div>
   );
 };
